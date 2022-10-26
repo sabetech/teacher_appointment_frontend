@@ -1,7 +1,6 @@
-import './App.css';
+import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import { DynamicItem, Sidebar, SideBarMenuItems } from "./components";
-
 
 function App() {
   return (
@@ -14,7 +13,9 @@ function App() {
               <Route
                 key={index}
                 path={item.path}
-                element={<DynamicItem page={item.name} />}
+                element={
+                  <DynamicItem page={item.name} component={item.component} />
+                }
               />
             ))}
         </Routes>

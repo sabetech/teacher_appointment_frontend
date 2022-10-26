@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowBackIcon } from "../Icons";
 
 const Item = (props) => {
-  const { page } = props;
+  const { page, component } = props;
   if (page === "homepage") {
     return <div id="page">{page}</div>;
   } else {
@@ -13,7 +13,7 @@ const Item = (props) => {
             <ArrowBackIcon /> Back to Home
           </button>
         </Link>
-        {page}
+        <div id="component">{component}</div>
       </div>
     );
   }

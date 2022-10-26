@@ -53,13 +53,13 @@
   justify-content: center;
   text-align: center;
   text-transform: capitalize;
-  font-size: 1rem;
+  font-size: 1rem !important;
   overflow: hidden;
 }
 
 @media screen and (min-width: 468px) {
   #page {
-    font-size: 3rem;
+    font-size: 2rem !important;
   }
 
   .btn {
