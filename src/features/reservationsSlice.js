@@ -3,9 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getReservation = createAsyncThunk(
   "reservations/getReservation",
   async () => {
-    const response = await fetch(
-      "http://localhost:3000/api/v1/users/1/reservations"
-    );
+    const response = await fetch("http://localhost:3000/api/v1/reservations");
     return response.json();
   }
 );
