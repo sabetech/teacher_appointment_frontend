@@ -14,7 +14,7 @@ const Reservations = () => {
   return (
     <div>
       <h1>Reservations</h1>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -30,7 +30,7 @@ const Reservations = () => {
               <td>{reservation.teacher_name}</td>
               <td>{reservation.reservation_date}</td>
               <td>
-                <button className="btn ">Cancel</button>
+                <button className="btn">Cancel</button>
               </td>
             </tr>
           ))}
