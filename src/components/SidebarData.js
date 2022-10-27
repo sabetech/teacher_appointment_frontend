@@ -12,8 +12,8 @@ import {
 } from "./Icons";
 
 import Reservations from "./Reservations";
-
 import ReservationForm from "./ReservationForm";
+import Homepage from "./Homepage";
 
 export const SIDEBAR_DATA = [
   {
@@ -21,6 +21,7 @@ export const SIDEBAR_DATA = [
     name: "dashboards",
     path: "dashboards",
     icon: <HomeIcon />,
+    component: <Homepage />
   },
   {
     id: 2,
