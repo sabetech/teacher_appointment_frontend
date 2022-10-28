@@ -4,10 +4,12 @@ import { login, signup } from "../services/api";
 export const signInUser = createAsyncThunk("users/getUser", async (user_credentials, {rejectWithValue}) => {
   try{
     const response = await login(user_credentials);
-    if (response.status === 200) {
-      const { data } = response;
-      const authorization = response.headers.get('Authorization');
-      return {data, authorization};
+    if (response.data.status.code === 200) {
+      
+      return { 
+        data:response.data.status.data, 
+        authorization: response.header
+      };
     }
 
   }catch(e){

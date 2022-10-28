@@ -22,9 +22,9 @@ const SignUpPage = ({name, email, password, submit}) => (
 
         <h3>Sign Up</h3>
         <form className="form">
-            <TextField id="outlined-basic" label="name" variant="outlined" sx={{marginBottom: 2}} onChange={ (e) => name(e.target.value)} />
-            <TextField id="outlined-basic" label="email" variant="outlined" sx={{marginBottom: 2}} onChange={ (e) => email(e.target.value)} />
-            <TextField id="outlined-basic" type="password" label="password" variant="outlined" sx={{marginBottom: 2}} onChange={ (e)=> password(e.target.value)} />
+            <TextField id="name" label="name" variant="outlined" sx={{marginBottom: 2}} onChange={ (e) => name(e.target.value)} />
+            <TextField id="email" label="email" variant="outlined" sx={{marginBottom: 2}} onChange={ (e) => email(e.target.value)} />
+            <TextField id="password" type="password" label="password" variant="outlined" sx={{marginBottom: 2}} onChange={ (e)=> password(e.target.value)} />
             <Button variant="contained" onClick={()=>submit()}>Sign Up</Button>
         </form>
         Got an Account? <Link to="/">Click here to Sign in</Link>

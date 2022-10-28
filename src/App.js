@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { Routes, Route, Link } from "react-router-dom";
 import { DynamicItem, Sidebar, SideBarMenuItems } from "./components";
@@ -8,6 +8,13 @@ import SignUp from "./pages/SignUp";
 
 function App() {
   const [ user, setUser ] = useState(null);
+
+  useEffect(() => {
+    const serializedUser = localStorage.getItem("user");
+    if (serializedUser){
+      setUser(JSON.parse(serializedUser));
+    }
+  },[]);
 
   return (
     <AuthContext.Provider value={{user, setUser}}>

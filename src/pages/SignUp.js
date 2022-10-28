@@ -17,6 +17,7 @@ export default function SignUp(){
         console.log("LOGGED IN USER:::", loggedInUser);
         if (loggedInUser) {
             setUser(loggedInUser);
+            localStorage.setItem("user", JSON.stringify(loggedInUser));
         }
     },[loggedInUser]);
 
