@@ -1,5 +1,5 @@
 // src/components/Sidebar/index.jsx
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import {
   Children,
@@ -10,14 +10,20 @@ import {
   SidebarBrand,
   SidebarToggler,
 } from "./SidebarStyles";
+import { Button } from "@mui/material";
+import { AuthContext } from "../../context/AuthContext";
+import { logoutUser } from "../../features/usersSlice";
 // import BrandLogo from "./BrandLogo.svg";
 
 import { SidebarItems } from "..";
+import { useDispatch } from "react-redux";
 
 const MOBILE_VIEW = window.innerWidth < 468;
 
 export default function Sidebar({ children }) {
   const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
+  const { user } = useContext(AuthContext);
+  const dispatch = useDispatch();
 
   const handleSidebarDisplay = (e) => {
     e.preventDefault();
@@ -27,6 +33,11 @@ export default function Sidebar({ children }) {
       setDisplaySidebar(false);
     }
   };
+
+  const logout = () => {
+    dispatch(logoutUser(user.authorization))
+    localStorage.clear();
+  }
 
   return (
     <React.Fragment>
@@ -47,14 +58,14 @@ export default function Sidebar({ children }) {
             </SidebarLogo>
             {/* Logo wrapper ends */}
             {/* Toggle button */}
-            {/* <SidebarToggler
+            <SidebarToggler
               displaySidebar={displaySidebar}
               onClick={handleSidebarDisplay}
             >
               <div className="outer__circle">
                 <div className="inner__circle" />
               </div>
-            </SidebarToggler> */}
+            </SidebarToggler>
           </SidebarLogoWrapper>
             {/* Render the SidebarItems component */}
           <SidebarItems displaySidebar={displaySidebar} />
@@ -62,6 +73,11 @@ export default function Sidebar({ children }) {
       </SidebarContainer>
             {/* Render the children */}
       <Children displaySidebar={displaySidebar}>{children}</Children>
+
+      <div>
+        {user.data.name}
+        <Button variant="outlined" onClick={()=>logout()}>Logout</Button>
+      </div>
     </React.Fragment>
   );
 }

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { login, signup } from "../services/api";
+import { login, logout, signup } from "../services/api";
 
 export const signInUser = createAsyncThunk("users/getUser", async (user_credentials, {rejectWithValue}) => {
   try{
@@ -23,7 +23,7 @@ export const createUser = createAsyncThunk("users/createUser", async (user_crede
   try{
     
     const response = await signup(user_credentials);
-    console.log(response)
+    
     if (response.data.status.code === 200) {
       
       return { 
@@ -33,8 +33,25 @@ export const createUser = createAsyncThunk("users/createUser", async (user_crede
     }
     console.log("content of response::", response.status)
   }catch(e){
-    console.log("I dount you come here!!!");
-    console.log("WHAT ERROR IS THIS ", e);
+    rejectWithValue("Exception:::"+ e);
+
+  }
+});
+
+export const logoutUser = createAsyncThunk("users/logoutUser", async (token, {rejectWithValue}) => {
+  try{
+    
+    const response = await logout({token});
+    
+    if (response.status.code === 200) {
+      
+      return { 
+        data:response.status.data
+      };
+    }
+    
+  }catch(e){
+    
     rejectWithValue("Exception:::"+ e);
 
   }
