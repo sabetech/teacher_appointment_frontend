@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import LoginPage from "../components/Auth/LoginPage";
 
 export default function Login(){
     const { user, setUser } = useContext(AuthContext);
@@ -16,13 +16,9 @@ export default function Login(){
 
 
     return (
-        <div>
-            <h3>Login</h3>
-            <input type="text" placeholder="email"/>
-            <input type="text" placeholder="password"/>
-            <button onClick={signIn}>Login</button>
-            <Link to="/signup">Sign up</Link>
-        </div>
+        <>
+            <LoginPage username={onChangeUsername} password={onChangePassword} submit={signIn}/>
+        </>
     );
 
 }
