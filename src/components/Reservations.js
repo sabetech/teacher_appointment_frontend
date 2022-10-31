@@ -3,25 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { AuthContext } from "../context/AuthContext";
 import { getBooking } from "../features/reservationsSlice";
 
-import { getTeachers } from "../services/api";
-
-
 const Reservations = () => {
   const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBooking(user.authorization));
-
-    dispatch(getTeachers(user.authorization));
   }, []);
-  const reservation = useSelector((state) => state.reservations);
-  const teachers = useSelector((state) => state.teachers);
-  console.log(teachers);
-  const allReservations = reservation.reservations;
-  console.log(allReservations);
 
-  }, []);
   const reservation = useSelector((state) => state.reservations);
   const allReservations = reservation.reservations;
   return (

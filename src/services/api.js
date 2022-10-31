@@ -71,10 +71,11 @@ export const getReservations = async ({ token }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: `${token}`,
       },
     });
     const data = await response.json();
+    console.log("data", data);
     return data;
   } catch (e) {
     throw new Error(e.getMessage());
@@ -137,85 +138,84 @@ export const deleteReservation = async ({ token, reservation }) => {
   }
 };
 
-export const getTeachers = async ({ token }) => {
-  try {
-    const response = await fetch(`${baseUrl}/api/v1/teachers`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    throw new Error(e.getMessage());
-  }
-};
+// export const getTeachers = async ({ token }) => {
+//   try {
+//     const response = await fetch(`${baseUrl}/api/v1/teachers`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: token,
+//       },
+//     });
+//     const data = await response.json();
+//     return data;
+//   } catch (e) {
+//     throw new Error(e.getMessage());
+//   }
+// };
 
-export const getTeacher = async ({ token, id }) => {
-  try {
-    const response = await fetch(`${baseUrl}/api/v1/teachers/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    throw new Error(e.getMessage());
-  }
-};
+// export const getTeacher = async ({ token, id }) => {
+//   try {
+//     const response = await fetch(`${baseUrl}/api/v1/teachers/${id}`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: token,
+//       },
+//     });
+//     const data = await response.json();
+//     return data;
+//   } catch (e) {
+//     throw new Error(e.getMessage());
+//   }
+// };
 
-export const addTeacher = async ({ token, teacher }) => {
-  try {
-    const response = await fetch(`${baseUrl}/api/v1/teachers`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-      body: JSON.stringify({ teacher: teacher }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    throw new Error(e.getMessage());
-  }
-};
+// export const addTeacher = async ({ token, teacher }) => {
+//   try {
+//     const response = await fetch(`${baseUrl}/api/v1/teachers`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `${token}`,
+//       },
+//       body: JSON.stringify({ teacher: teacher }),
+//     });
+//     const data = await response.json();
+//     return data;
+//   } catch (e) {
+//     throw new Error(e.getMessage());
+//   }
+// };
 
-export const updateTeacher = async ({ token, teacher }) => {
-  try {
-    const response = await fetch(`${baseUrl}/api/v1/teachers/${teacher.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-      body: JSON.stringify({ teacher: teacher }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    throw new Error(e.getMessage());
-  }
-};
+// export const updateTeacher = async ({ token, teacher }) => {
+//   try {
+//     const response = await fetch(`${baseUrl}/api/v1/teachers/${teacher.id}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `${token}`,
+//       },
+//       body: JSON.stringify({ teacher: teacher }),
+//     });
+//     const data = await response.json();
+//     return data;
+//   } catch (e) {
+//     throw new Error(e.getMessage());
+//   }
+// };
 
-export const deleteTeacher = async ({ token, teacher }) => {
-  try {
-    const response = await fetch(`${baseUrl}/api/v1/teachers/${teacher.id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-    });
-    const data = await response.json();
-    return data;
-  } catch (e) {
-    throw new Error(e.getMessage());
-  }
-};
-
+// export const deleteTeacher = async ({ token, teacher }) => {
+//   try {
+//     const response = await fetch(`${baseUrl}/api/v1/teachers/${teacher.id}`, {
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `${token}`,
+//       },
+//     });
+//     const data = await response.json();
+//     return data;
+//   } catch (e) {
+//     throw new Error(e.getMessage());
+//   }
+// };

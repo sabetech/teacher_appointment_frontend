@@ -1,11 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createReservation, getReservations, updateReservation } from "../services/api";
+import {
+  createReservation,
+  getReservations,
+  updateReservation,
+} from "../services/api";
 
 export const getBooking = createAsyncThunk(
   "reservations/getBooking",
   async (token, { rejectWithValue }) => {
     try {
       const response = await getReservations({ token });
+      console.log("response", response);
       return response;
     } catch (e) {
       rejectWithValue("Exception:::" + e);
@@ -36,8 +41,6 @@ export const addBooking = createAsyncThunk(
     }
   }
 );
-
-
 
 const initialState = {
   reservations: [],
