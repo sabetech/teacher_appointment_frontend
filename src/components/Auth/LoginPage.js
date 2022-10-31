@@ -23,7 +23,7 @@ const LoginPage = ({username, password, submit}) => {
           <h2>Login</h2>
         <form className="form">
           <TextField id="email" label="email" variant="outlined" sx={{marginBottom: 2}} onChange={ (e) => username(e.target.value)} />
-          <TextField id="password" label="password" variant="outlined" sx={{marginBottom: 2}} onChange={ (e)=> password(e.target.value)} />
+          <TextField type="password" id="password" label="password" variant="outlined" sx={{marginBottom: 2}} onChange={ (e)=> password(e.target.value)} />
           <Button variant="contained" onClick={()=>submit()}>Login</Button>
         </form>
         Don't Have an Account?<Link to="/signup"> Click to Sign up!</Link>

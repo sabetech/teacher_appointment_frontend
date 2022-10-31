@@ -7,14 +7,19 @@ const Item = (props) => {
     return <div id="page">{page}</div>;
   } else {
     return (
-      <div id="page">
-        <Link to="/">
-          <button className="btn">
-            <ArrowBackIcon /> Back to Home
-          </button>
-        </Link>
+      <>
+        <div id="page">
+          <Link to="/">
+            <button className="btn">
+              <ArrowBackIcon /> Back to Home
+            </button>
+          </Link>
+          {/* <h1>{page.name}</h1> */}
+        </div>
+
         <div id="component">{component}</div>
-      </div>
+
+      </>
     );
   }
 };

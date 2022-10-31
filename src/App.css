@@ -50,7 +50,7 @@
 #page {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   text-transform: capitalize;
   font-size: 1rem !important;

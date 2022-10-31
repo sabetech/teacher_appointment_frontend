@@ -1,0 +1,15 @@
+.teachers {
+    padding: 1rem;
+}
+
+.teacher-list {
+    display:flex;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.teacher-single {
+   margin: 5px;
+}

@@ -22,7 +22,7 @@ const MOBILE_VIEW = window.innerWidth < 468;
 
 export default function Sidebar({ children }) {
   const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const dispatch = useDispatch();
 
   const handleSidebarDisplay = (e) => {
@@ -37,6 +37,7 @@ export default function Sidebar({ children }) {
   const logout = () => {
     dispatch(logoutUser(user.authorization))
     localStorage.clear();
+    setUser(null);
   }
 
   return (

@@ -5,6 +5,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { DynamicItem, Sidebar, SideBarMenuItems } from "./components";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Teachers from "./components/Teacher/Teachers";
 
 function App() {
   const [ user, setUser ] = useState(null);
@@ -31,7 +32,7 @@ function App() {
           <div id="main">
             <Sidebar>
               <Routes>
-                <Route path="/" element={<DynamicItem page="homepage" />} />
+                <Route path="/" element={<DynamicItem page="homepage" component={<Teachers />}/>} />
                 {SideBarMenuItems &&
                   SideBarMenuItems.map((item, index) => (
                     <Route
