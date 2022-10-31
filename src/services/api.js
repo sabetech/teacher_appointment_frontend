@@ -218,3 +218,4 @@ export const deleteTeacher = async ({ token, teacher }) => {
     throw new Error(e.getMessage());
   }
 };
+

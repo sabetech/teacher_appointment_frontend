@@ -2,7 +2,9 @@ import React, { useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AuthContext } from "../context/AuthContext";
 import { getBooking } from "../features/reservationsSlice";
+
 import { getTeachers } from "../services/api";
+
 
 const Reservations = () => {
   const { user } = useContext(AuthContext);
@@ -10,6 +12,7 @@ const Reservations = () => {
 
   useEffect(() => {
     dispatch(getBooking(user.authorization));
+
     dispatch(getTeachers(user.authorization));
   }, []);
   const reservation = useSelector((state) => state.reservations);
@@ -17,6 +20,10 @@ const Reservations = () => {
   console.log(teachers);
   const allReservations = reservation.reservations;
   console.log(allReservations);
+
+  }, []);
+  const reservation = useSelector((state) => state.reservations);
+  const allReservations = reservation.reservations;
   return (
     <div>
       <h1>Reservations</h1>
