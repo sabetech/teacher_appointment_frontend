@@ -1,16 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getReservation } from "../features/reservationsSlice";
+import { AuthContext } from "../context/AuthContext";
+import { getBooking } from "../features/reservationsSlice";
+import { getTeachers } from "../services/api";
 
 const Reservations = () => {
+  const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
-  const reservation = useSelector((state) => state.reservations);
-  const allReservations = reservation.reservations;
-  console.log(allReservations);
 
   useEffect(() => {
-    dispatch(getReservation());
+    dispatch(getBooking(user.authorization));
+    dispatch(getTeachers(user.authorization));
   }, []);
+  const reservation = useSelector((state) => state.reservations);
+  const teachers = useSelector((state) => state.teachers);
+  console.log(teachers);
+  const allReservations = reservation.reservations;
+  console.log(allReservations);
   return (
     <div>
       <h1>Reservations</h1>
@@ -27,7 +33,7 @@ const Reservations = () => {
           {allReservations.map((reservation) => (
             <tr>
               <th scope="row">{reservation.id}</th>
-              <td>{reservation.teacher_name}</td>
+              <td>{reservation.teacher_id}</td>
               <td>{reservation.reservation_date}</td>
               <td>
                 <button className="btn">Cancel</button>

@@ -1,12 +1,43 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createReservation, getReservations, updateReservation } from "../services/api";
 
-export const getReservation = createAsyncThunk(
-  "reservations/getReservation",
-  async () => {
-    const response = await fetch("http://localhost:3000/api/v1/reservations");
-    return response.json();
+export const getBooking = createAsyncThunk(
+  "reservations/getBooking",
+  async (token, { rejectWithValue }) => {
+    try {
+      const response = await getReservations({ token });
+      return response;
+    } catch (e) {
+      rejectWithValue("Exception:::" + e);
+    }
   }
 );
+
+export const updateBooking = createAsyncThunk(
+  "reservations/updateReservation",
+  async (reservation, { rejectWithValue }) => {
+    try {
+      const response = await updateReservation({ reservation });
+      return response;
+    } catch (e) {
+      rejectWithValue("Exception:::" + e);
+    }
+  }
+);
+
+export const addBooking = createAsyncThunk(
+  "reservations/addBooking",
+  async (reservation, { rejectWithValue }) => {
+    try {
+      const response = await createReservation({ reservation });
+      return response;
+    } catch (e) {
+      rejectWithValue("Exception:::" + e);
+    }
+  }
+);
+
+
 
 const initialState = {
   reservations: [],
@@ -17,7 +48,13 @@ const reservationsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [getReservation.fulfilled]: (state, action) => {
+    [getBooking.fulfilled]: (state, action) => {
+      state.reservations = action.payload;
+    },
+    [getBooking.rejected]: (state, action) => {
+      state.reservations = action.payload;
+    },
+    [updateBooking.fulfilled]: (state, action) => {
       state.reservations = action.payload;
     },
   },
