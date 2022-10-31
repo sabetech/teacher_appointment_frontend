@@ -11,16 +11,18 @@ import {
   ModalIcon,
 } from "./Icons";
 
-import Reservations from "./Reservations";
+import Reservations from "./Reservation/Reservations";
 
-import ReservationForm from "./ReservationForm";
+import ReservationForm from "./Reservation/ReservationForm";
+import Teachers from "./Teacher/Teachers";
 
 export const SIDEBAR_DATA = [
   {
     id: 1,
-    name: "dashboards",
-    path: "dashboards",
+    name: "Teachers",
+    path: "home",
     icon: <HomeIcon />,
+    component: <Teachers />
   },
   {
     id: 2,

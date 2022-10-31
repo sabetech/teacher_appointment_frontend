@@ -97,6 +97,19 @@ export const userSlice = createSlice({
       state.status = "Ready";
       console.log("ARE YOU ERROR:::", action.payload);
       state.user = action.payload;
+    })
+    .addCase(logoutUser.pending, (state) => {
+      state.status = "Loading";
+    })
+    .addCase(logoutUser.fulfilled, (state, action) => {
+      state.status = "Ready";
+      console.log("SUCCESS::", action.payload);
+      state.user = null;
+    })
+    .addCase(logoutUser.rejected, (state, action) => {
+      //an error occurred. get error action payload
+      state.status = "Ready";
+      console.log("ARE YOU ERROR:::", action.payload);
     });
   }
 });

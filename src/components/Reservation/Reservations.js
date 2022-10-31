@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getReservation } from "../features/reservationsSlice";
+import { getReservation } from "../../features/reservationsSlice";
 
 const Reservations = () => {
   const dispatch = useDispatch();
