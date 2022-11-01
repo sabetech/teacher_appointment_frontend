@@ -52,4 +52,5 @@ export const SIDEBAR_DATA = [
     icon: <RolesIcon />,
     component: <ReservationForm />,
   },
+
 ];

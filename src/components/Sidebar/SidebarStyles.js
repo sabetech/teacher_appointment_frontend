@@ -49,6 +49,7 @@ export const SidebarToggler = styled.button`
   @media (max-width: 468px) {
     display: block;
   }
+  text-underlined: none;
 `;
 
 // SidebarItem styles

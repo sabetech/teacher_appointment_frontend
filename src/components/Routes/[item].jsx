@@ -3,24 +3,21 @@ import { ArrowBackIcon } from "../Icons";
 
 const Item = (props) => {
   const { page, component } = props;
- 
-    return (
-      <>
-        <div id="page">
-          {
-          (page !== "Teachers") &&
-            (
-              <Link to="/">
-                <button className="btn">
-                  <ArrowBackIcon /> Back to Home
-                </button>
-              </Link>
-          )
-        }
-        </div>
-        <div id="component">{component}</div>
-      </>
-    );
+
+  return (
+    <>
+      <div id="page">
+        {page !== "Teachers" && (
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <button className="btn">
+              <ArrowBackIcon /> Back to Home
+            </button>
+          </Link>
+        )}
+      </div>
+      <div id="component">{component}</div>
+    </>
+  );
 };
 
 export default Item;
