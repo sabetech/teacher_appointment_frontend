@@ -6,6 +6,7 @@ import { DynamicItem, Sidebar, SideBarMenuItems } from "./components";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Teachers from "./components/Teacher/Teachers";
+import TeacherDetail from "./components/Teacher/Teacher-Detail";
 
 function App() {
   const [ user, setUser ] = useState(null);
@@ -32,7 +33,7 @@ function App() {
           <div id="main">
             <Sidebar>
               <Routes>
-                <Route path="/" element={<DynamicItem page="homepage" component={<Teachers />}/>} />
+                {/* <Route path="/" element={<DynamicItem page="homepage" component={<Teachers />}/>} /> */}
                 {SideBarMenuItems &&
                   SideBarMenuItems.map((item, index) => (
                     <Route
@@ -43,6 +44,7 @@ function App() {
                       }
                     />
                   ))}
+                  <Route path="/teachers/details/:id" element={<DynamicItem page="teacher details" component={<TeacherDetail />}/>} />
               </Routes>
             </Sidebar>
           </div>

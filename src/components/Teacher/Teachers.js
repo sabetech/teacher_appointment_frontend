@@ -23,6 +23,7 @@ const Teachers = () => {
                     teachers && teachers.map(teacher => 
                                             <li className="teacher-single" key={teacher.id}>
                                                 <Teacher 
+                                                    id={teacher.id}
                                                     name={teacher.name} 
                                                     title={teacher.title}
                                                     photo={teacher.photo} 

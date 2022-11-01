@@ -47,7 +47,7 @@ export const signup = async ({name, email, password}) => {
 
 export const logout = async ({token}) => {
     try{
-        const response = await fetch(`${baseUrl}/users/sign_out`, {
+        const response = await fetch(`${baseUrl}users/sign_out`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json',
