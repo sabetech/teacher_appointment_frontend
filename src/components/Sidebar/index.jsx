@@ -77,8 +77,11 @@ export default function Sidebar({ children }) {
       <Children displaySidebar={displaySidebar}>{children}</Children>
 
       <div>
-        {user.data.name}
-        <Button variant="outlined" onClick={() => logout()}>
+        <Button
+          variant="outlined"
+          onClick={() => logout()}
+          className="my-2 mx-2"
+        >
           Logout
         </Button>
       </div>
