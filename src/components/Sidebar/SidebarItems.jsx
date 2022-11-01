@@ -18,10 +18,9 @@ const SidebarItems = ({ displaySidebar }) => {
         <ItemContainer
           key={index}
           onClick={() => setActiveItem(itemData.id)}
-          
           className={itemData.id === activeItem ? "active" : ""}
         >
-          <Link to={itemData.path}>
+          <Link to={itemData.path} style={{ textDecoration: "none" }}>
             <ItemWrapper>
               {itemData.icon}
               <ItemName displaySidebar={displaySidebar}>
