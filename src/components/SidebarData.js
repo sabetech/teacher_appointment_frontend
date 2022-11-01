@@ -20,13 +20,13 @@ export const SIDEBAR_DATA = [
   {
     id: 1,
     name: "Teachers",
-    path: "home",
+    path: "/",
     icon: <HomeIcon />,
     component: <Teachers />
   },
   {
     id: 2,
-    name: "Reservations",
+    name: "My Reservations",
     path: "reservations",
     icon: <LayoutIcon />,
     component: <Reservations />,
@@ -34,7 +34,21 @@ export const SIDEBAR_DATA = [
   {
     id: 3,
     name: "Book appointment",
+    path: "reserve",
+    icon: <RolesIcon />,
+    component: <ReservationForm />,
+  },
+  {
+    id: 4,
+    name: "Add Teacher",
     path: "addteacher",
+    icon: <RolesIcon />,
+    component: <ReservationForm />,
+  },
+  {
+    id: 5,
+    name: "Delete Teacher",
+    path: "remove-teacher",
     icon: <RolesIcon />,
     component: <ReservationForm />,
   },
