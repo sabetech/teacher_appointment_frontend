@@ -9,12 +9,14 @@ import {
   AuthIcon,
   WizardIcon,
   ModalIcon,
+  DeleteIcon,
 } from "./Icons";
 
 import Reservations from "./Reservation/Reservations";
 
 import ReservationForm from "./Reservation/ReservationForm";
 import Teachers from "./Teacher/Teachers";
+import AddTeacher from "./Teacher/AddTeacher";
 
 export const SIDEBAR_DATA = [
   {
@@ -42,14 +44,14 @@ export const SIDEBAR_DATA = [
     id: 4,
     name: "Add Teacher",
     path: "addteacher",
-    icon: <RolesIcon />,
-    component: <ReservationForm />,
+    icon: <UserIcon />,
+    component: <AddTeacher />,
   },
   {
     id: 5,
     name: "Delete Teacher",
     path: "remove-teacher",
-    icon: <RolesIcon />,
+    icon: <DeleteIcon />,
     component: <ReservationForm />,
   },
 ];
