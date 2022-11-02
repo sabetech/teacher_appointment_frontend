@@ -18,6 +18,7 @@ export const fetchReservations = createAsyncThunk(
 export const createReservation = createAsyncThunk("reservations/makeReservation", 
   async ({token, teacher, city, reservation_date }, {rejectWithValue}) => {
     try{
+      
       const response = await makeReservation({token, teacher, city, reservation_date});
       if (!response) {
         localStorage.clear();
@@ -26,7 +27,8 @@ export const createReservation = createAsyncThunk("reservations/makeReservation"
       }
       return response;
     }catch( e ){
-      rejectWithValue("Exception:::"+ e.message());
+      console.log("Exception:::", e);
+      rejectWithValue(e.message);
     }
     
 });
@@ -41,19 +43,24 @@ const reservationsSlice = createSlice({
   name: "reservations",
   initialState,
   reducers: {},
-  extraReducers: {
-    [fetchReservations.fulfilled]: (state, action) => {
+  extraReducers(builder) {
+    builder
+    .addCase(fetchReservations.fulfilled, (state, action) => {
       state.reservations = action.payload;
-    },
-    [createReservation.pending]: (state) => {
+    })
+    .addCase(createReservation.pending, (state) => {
       state.status = "Loading";
-    },
-    [createReservation.fulfilled]: (state, action) => {
+    })
+    .addCase(createReservation.fulfilled, (state, action) => {
+      console.log("SHOULD NOT SHOW ON ERROR::", action.payload);
       state.status = "Success";
-    },
-    [createReservation.rejected]: (state, action) => {
+    })
+    .addCase(createReservation.rejected, (state, action) => {
+      console.log("FAILED HERE");
+      state.status = "Failed";
       state.message = action.payload;
-    }
+      console.log("ERRIOR MESSAGE::",action.payload)
+    })
   },
 });
 

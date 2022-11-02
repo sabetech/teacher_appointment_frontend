@@ -34,7 +34,7 @@ const Reservations = () => {
         </thead>
         <tbody>
           {allReservations.map((reservation) => (
-            <tr>
+            <tr key={reservation.id}>
               <th scope="row">{reservation.id}</th>
               <td>{reservation.teacher.name}</td>
               <td>{reservation.reservation_date}</td>

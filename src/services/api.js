@@ -18,7 +18,7 @@ export const login = async ({email, password}) => {
                 header: response.headers.get('Authorization')
             };
     }catch( e ){
-        throw new Error(e.message())
+        throw new Error(e.message)
     }
 }
 
@@ -41,7 +41,7 @@ export const signup = async ({name, email, password}) => {
                 header: response.headers.get('Authorization')
             };
     }catch( e ){
-        throw new Error(e.message())
+        throw new Error(e.message)
     }
 }
 
@@ -57,7 +57,7 @@ export const logout = async ({token}) => {
         const data = await response.json();
         return data;
     }catch( e ){
-        throw new Error(e.getMessage());
+        throw new Error(e.message);
     }
 }
 
@@ -69,12 +69,12 @@ export const teachers = async({token}) => {
                             'Authorization': token
                         },
                     });
-        if (res.status == 401) {
+        if (res.status === 401) {
             return false;
         }
         return res.json();
     }catch( e ){
-        throw new Error(e.getMessage());
+        throw new Error(e.message);
     }
 }
 
@@ -94,12 +94,12 @@ export const createTeacher = async({token, teacher}) => {
                             }
                         )
                     });
-        if (res.status == 401){
+        if (res.status === 401){
             return false;
         }
         return res.json();
     }catch( e ){
-        throw new Error(e.getMessage());
+        throw new Error(e.message);
     }
 }
 
@@ -112,12 +112,12 @@ export const getTeacher = async({token, teacher_id}) => {
                             'Authorization': token
                         }
                     });
-        if (res.status == 401){
+        if (res.status === 401){
             return false;
         }
         return res.json();
     }catch( e ){
-        throw new Error(e.getMessage());
+        throw new Error(e.message);
     }
 }
 
@@ -135,12 +135,11 @@ export const getReservations = async({token}) => {
         }
         return res.json();
     }catch( e ){
-        throw new Error(e.getMessage());
+        throw new Error(e.message);
     }
 }
 
 export const makeReservation = async({token, teacher, city, reservation_date}) => {
-    
     try {
         const res = await fetch(`${baseUrl}/api/v1/reservations`, {
                         method: "POST",
@@ -156,12 +155,17 @@ export const makeReservation = async({token, teacher, city, reservation_date}) =
                             }
                         )
                     });
-        if (res.status == 401){
+        if (res.status === 401){
             return false;
         }
+
+        if (res.status === 500) {
+            throw new Error("You already have a reservation for this teacher");
+        }
+
         return res.json();
     }catch( e ){
-        throw new Error(e.getMessage());
+        throw new Error(e.message);
     }
 }
 

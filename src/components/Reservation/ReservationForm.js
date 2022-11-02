@@ -1,32 +1,44 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createReservation } from "../../features/reservationsSlice";
 import { AuthContext } from "../../context/AuthContext";
 import "./ReservationForm.css";
 import { Snackbar, Alert } from "@mui/material";
+import { redirect } from "react-router-dom";
 
 
 const ReservationForm = () => {
   const teachers = useSelector((state) => state.teacher.teachers);
   const dispatch = useDispatch();
+  const createReservationStatus = useSelector((state) => state.reservations.status);
   const [reservation_date, setReservationDate] = useState(null);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [city, setCity] = useState(null);
   const [snackOpen, setSnackOpen] = useState(false);
   const { user } = useContext(AuthContext);
 
+  useEffect(() => {
+    if (createReservationStatus === "Success") {
+        setSnackOpen(true);
+        redirect("/reservations"); //for some reason, this doesn't work
+    }
+  },[createReservationStatus]);
+
   const handleSubmit = () => {
+
     let token = user.authorization;
-    let dateString = reservation_date.year()+"-"+reservation_date.month()+"-"+reservation_date.day();
     
-    dispatch(createReservation({token, selectedTeacher, city, reservation_date: dateString}));
+    let dateString = reservation_date;
+    
+    dispatch(createReservation({token, teacher: (selectedTeacher || teachers[0]), city, reservation_date: dateString}));
   }
 
-  const handleTeacherSelect = (e) => {
-    let teacherId = parseInt(e.target.value);
-    setSelectedTeacher(teachers.find((teacher) => teacher.id === teacherId));
+  const handleTeacherSelect = (text) => {
+    let teacherId = parseInt(text);
+    const sel_teacher = teachers.find((teacher) => teacher.id === teacherId);
+    
+    setSelectedTeacher(sel_teacher);
   }
-
 
   const handleSnackClose = () => {
     setSnackOpen(false);
@@ -65,7 +77,7 @@ const ReservationForm = () => {
             <div className="row">
               <div className="col-sm-12">
                 <div className="form-group">
-                  <label for="date">Date</label>
+                  <label >Date</label>
                   <input
                     type="date"
                     className="form-control"
