@@ -9,7 +9,7 @@ const Item = (props) => {
       <div id="page">
         {page !== "Teachers" && (
           <Link to="/" style={{ textDecoration: "none" }}>
-            <button className="btn">
+            <button className="btn" style={{ marginLeft: "5px" }}>
               <ArrowBackIcon /> Back to Home
             </button>
           </Link>
