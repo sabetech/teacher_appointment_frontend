@@ -6,7 +6,6 @@ import "./ReservationForm.css";
 import { Snackbar, Alert } from "@mui/material";
 import { redirect } from "react-router-dom";
 
-
 const ReservationForm = () => {
   const teachers = useSelector((state) => state.teacher.teachers);
   const dispatch = useDispatch();
