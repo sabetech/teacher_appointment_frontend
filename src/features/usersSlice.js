@@ -48,6 +48,8 @@ export const logoutUser = createAsyncThunk("users/logoutUser", async (token, {re
       return { 
         data:response.status.data
       };
+    } else if(response.status.code === 401){
+      return true;
     }
     
   }catch(e){

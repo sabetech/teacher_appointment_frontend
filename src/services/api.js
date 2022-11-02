@@ -1,8 +1,8 @@
-const baseUrl = 'http://127.0.0.1:3001/';
+const baseUrl = 'http://127.0.0.1:3001';
 
 export const login = async ({email, password}) => {
     try{
-        const response = await fetch(`${baseUrl}users/sign_in`, {
+        const response = await fetch(`${baseUrl}/users/sign_in`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ export const login = async ({email, password}) => {
 
 export const signup = async ({name, email, password}) => {
     try{
-        const response = await fetch(`${baseUrl}users`, {
+        const response = await fetch(`${baseUrl}/users`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ export const signup = async ({name, email, password}) => {
 
 export const logout = async ({token}) => {
     try{
-        const response = await fetch(`${baseUrl}users/sign_out`, {
+        const response = await fetch(`${baseUrl}/users/sign_out`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -69,7 +69,9 @@ export const teachers = async({token}) => {
                             'Authorization': token
                         },
                     });
-        
+        if (res.status == 401) {
+            return false;
+        }
         return res.json();
     }catch( e ){
         throw new Error(e.getMessage());
@@ -92,6 +94,9 @@ export const createTeacher = async({token, teacher}) => {
                             }
                         )
                     });
+        if (res.status == 401){
+            return false;
+        }
         return res.json();
     }catch( e ){
         throw new Error(e.getMessage());
@@ -107,6 +112,53 @@ export const getTeacher = async({token, teacher_id}) => {
                             'Authorization': token
                         }
                     });
+        if (res.status == 401){
+            return false;
+        }
+        return res.json();
+    }catch( e ){
+        throw new Error(e.getMessage());
+    }
+}
+
+export const getReservations = async({token}) => {
+    try {
+        const res = await fetch(`${baseUrl}/api/v1/reservations`, {
+                        method: "GET",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        }
+                    });
+        if (res.status == 401) {
+            return false;
+        }
+        return res.json();
+    }catch( e ){
+        throw new Error(e.getMessage());
+    }
+}
+
+export const makeReservation = async({token, teacher, city, reservation_date}) => {
+    console.log(teacher, city, reservation_date);
+    try {
+        const res = await fetch(`${baseUrl}/api/v1/reservations`, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify(
+                            {
+                                reservation_date: reservation_date,
+                                city: city,
+                                teacher_id: teacher.id
+                            }
+                        )
+                    });
+        if (res.status == 401){
+            return false;
+        }
         return res.json();
     }catch( e ){
         throw new Error(e.getMessage());

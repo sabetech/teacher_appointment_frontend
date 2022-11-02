@@ -1,11 +1,10 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { DynamicItem, Sidebar, SideBarMenuItems } from "./components";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Teachers from "./components/Teacher/Teachers";
 import TeacherDetail from "./components/Teacher/Teacher-Detail";
 
 function App() {
@@ -15,6 +14,8 @@ function App() {
     const serializedUser = localStorage.getItem("user");
     if (serializedUser) {
       setUser(JSON.parse(serializedUser));
+    }else{
+      setUser(null);
     }
   }, []);
 
@@ -25,13 +26,16 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route
+                path="*"
+                element={<Navigate to="/" replace />}
+            />
           </Routes>
         </>
       ) : (
         <div id="main">
           <Sidebar>
             <Routes>
-              {/* <Route path="/" element={<DynamicItem page="homepage" component={<Teachers />}/>} /> */}
               {SideBarMenuItems &&
                 SideBarMenuItems.map((item, index) => (
                   <Route
@@ -53,6 +57,10 @@ function App() {
                     component={<TeacherDetail />}
                   />
                 }
+              />
+              <Route
+                path="*"
+                element={<Navigate to="/" replace />}
               />
             </Routes>
           </Sidebar>

@@ -29,7 +29,7 @@ const Teachers = () => {
                   photo={teacher.photo}
                 />
               </div>
-            ))}
+            )) || <div className="text-center">No Teachers Exists</div>}
         </div>
       </div>
     </>

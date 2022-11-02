@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getReservation } from "../../features/reservationsSlice";
+import { fetchReservations } from "../../features/reservationsSlice";
 
 const Reservations = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const Reservations = () => {
   console.log(allReservations);
 
   useEffect(() => {
-    dispatch(getReservation());
+    dispatch(fetchReservations());
   }, []);
   return (
     <div>
