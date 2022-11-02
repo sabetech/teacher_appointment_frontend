@@ -10,7 +10,7 @@ const Teacher = ({ id, name, title, photo }) => (
   <div style={{ cursor: "pointer" }}>
     <Link to={`/teachers/details/${id}`} style={{ textDecoration: "none" }}>
       <Card
-        sx={{ width: 400, height: 400 }}
+        sx={{ width: 450, height: 500 }}
         style={{
           borderRadius: "50%",
           display: "flex",
@@ -26,6 +26,7 @@ const Teacher = ({ id, name, title, photo }) => (
           image={photo}
           alt="profile photo"
           sx={{ width: 250 }}
+          style={{ borderRadius: "50%" }}
         />
         <CardContent>
           <Typography
