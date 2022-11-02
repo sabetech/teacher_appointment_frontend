@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createReservation } from "../../features/reservationsSlice";
+import { createReservation, setIdle } from "../../features/reservationsSlice";
 import { AuthContext } from "../../context/AuthContext";
 import "./ReservationForm.css";
 import { Snackbar, Alert } from "@mui/material";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ReservationForm = () => {
   const teachers = useSelector((state) => state.teacher.teachers);
@@ -17,11 +17,12 @@ const ReservationForm = () => {
   const [city, setCity] = useState(null);
   const [snackOpen, setSnackOpen] = useState(false);
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (createReservationStatus === "Success") {
-      setSnackOpen(true);
-      redirect("/reservations"); //for some reason, this doesn't work
+    if (createReservationStatus === "CreateReservationSuccess") {
+        dispatch(setIdle());  
+        setSnackOpen(true);
     }
   }, [createReservationStatus]);
 
@@ -48,6 +49,7 @@ const ReservationForm = () => {
   };
 
   const handleSnackClose = () => {
+    navigate("/reservations");
     setSnackOpen(false);
   };
 

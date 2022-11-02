@@ -78,8 +78,14 @@ export const teachers = async({token}) => {
     }
 }
 
-export const createTeacher = async({token, teacher}) => {
+export const createTeacher = async({token, teacher}) => {    
     try {
+        const formData = new FormData();
+        formData.append("file", teacher.photo);
+        formData.append("upload_preset", teacher.upload_preset);
+
+        const responseImage = await saveTeacherPhoto(formData);
+        
         const res = await fetch(`${baseUrl}/api/v1/teachers`, {
                         method: "POST",
                         headers: {
@@ -90,7 +96,9 @@ export const createTeacher = async({token, teacher}) => {
                             {
                                 name: teacher.name,
                                 title: teacher.title,
-                                photo: teacher.photo
+                                bio: teacher.bio,
+                                work_experience: teacher.experience,
+                                photo: responseImage.url
                             }
                         )
                     });
@@ -100,6 +108,22 @@ export const createTeacher = async({token, teacher}) => {
         return res.json();
     }catch( e ){
         throw new Error(e.message);
+    }
+}
+
+const saveTeacherPhoto = async (formData) => {
+    try{
+        const response = await fetch("https://api.cloudinary.com/v1_1/ddukvxuai/image/upload",
+            {   
+                method: "POST",
+                body: formData
+            }
+        );
+        
+        return response.json();
+    }catch(e){
+
+
     }
 }
 

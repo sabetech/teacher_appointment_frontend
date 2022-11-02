@@ -1,4 +1,4 @@
-import { redirect, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchteachers, getTeacherList } from "../../features/teachersSlice";
 import { useContext, useEffect, useState } from "react";
@@ -15,7 +15,7 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-import { createReservation } from "../../features/reservationsSlice";
+import { createReservation, setIdle } from "../../features/reservationsSlice";
 import { Snackbar, Alert } from "@mui/material";
 
 import "./Teacher-detail.css";
@@ -34,6 +34,7 @@ const TeacherDetail = () => {
   const [reservation_date, setDate] = useState(null);
   const [open, setOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (teachers.length == 0) {
@@ -44,8 +45,9 @@ const TeacherDetail = () => {
 
   useEffect(() => {
     if (createReservationStatus === "Success") {
-      setSnackOpen(true);
-      redirect("/reservations");
+        dispatch(setIdle());
+        setSnackOpen(true);
+        navigate("/reservations");
     }
   }, [createReservationStatus]);
 

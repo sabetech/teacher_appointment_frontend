@@ -16,6 +16,7 @@ import Reservations from "./Reservation/Reservations";
 import ReservationForm from "./Reservation/ReservationForm";
 import Teachers from "./Teacher/Teachers";
 import RemoveTeacher from "./Teacher/RemoveTeacher";
+import AddTeacher from "./Teacher/AddTeacher";
 
 export const SIDEBAR_DATA = [
   {
@@ -44,7 +45,7 @@ export const SIDEBAR_DATA = [
     name: "Add Teacher",
     path: "addteacher",
     icon: <UserIcon />,
-    component: <ReservationForm />,
+    component: <AddTeacher />,
   },
   {
     id: 5,
