@@ -1,4 +1,4 @@
-import { redirect, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchteachers, getTeacherList } from "../../features/teachersSlice";
 import { useContext, useEffect, useState } from "react";
@@ -24,6 +24,7 @@ const TeacherDetail = () => {
   const [reservation_date, setDate] = useState(null);
   const [open, setOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (teachers.length == 0) {
@@ -35,7 +36,7 @@ const TeacherDetail = () => {
   useEffect(() => {
     if (createReservationStatus === "Success") {
         setSnackOpen(true);
-        redirect("/reservations");
+        navigate("/reservations");
     }
   },[createReservationStatus]);
 
@@ -136,8 +137,12 @@ const TeacherDetail = () => {
                     <button className="bg-secondary p-1 px-4 rounded text-white" onClick={()=>handleReserve()}>
                       reserve
                     </button>
-                    <h5 className="mt-2 mb-0">{teacher.name}</h5>
-                    <span>{teacher.title}</span>
+                    <ul style={{listStyle: "none", padding: 0}}>
+                      <h5 className="mt-2 mb-0">{teacher.name}</h5>
+                      <li className="text-secondary">BIO: {teacher.bio}</li>
+                      <li className="text-secondary">WORK EXPERIENCE: {teacher.work_experience}</li>
+                      <li>{teacher.title}</li>
+                    </ul>
                   </div>
                 </div>
               </div>

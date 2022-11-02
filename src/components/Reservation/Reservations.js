@@ -9,17 +9,19 @@ const Reservations = () => {
   const reservation = useSelector((state) => state.reservations);
   const [allReservations, setAllReservations] = useState([]);
   
-  // console.log(allReservations);
+  useEffect(() => {
+    if (reservation.reservations.length == 0) {
+      dispatch(fetchReservations(user.authorization));
+      return;
+    }
+  },[reservation]);
 
   useEffect(() => {
-    setAllReservations(reservation.reservations);
+    if (reservation.reservations.length > 0) {
+      setAllReservations(reservation.reservations);
+    }
+  },[fetchReservations]);
 
-    console.log(allReservations);
-  }, [reservation]);
-
-  useEffect(() => {
-    dispatch(fetchReservations(user.authorization));
-  }, [fetchReservations]);
   return (
     <div>
       <h1>Reservations</h1>

@@ -19,7 +19,8 @@ const Teachers = () => {
       <h1 className="text-center">Teachers</h1>
       <div className="teachers">
         <div className="teacher-list">
-          {teachers &&
+          {
+          (teachers ?
             teachers.map((teacher) => (
               <div className="teacher-single" key={teacher.id}>
                 <Teacher
@@ -29,7 +30,8 @@ const Teachers = () => {
                   photo={teacher.photo}
                 />
               </div>
-            )) || <div className="text-center">No Teachers Exists</div>}
+            )) : <div className="text-center">No Teachers Exists</div>)
+            }
         </div>
       </div>
     </>

@@ -1,17 +1,15 @@
-import { redirect } from "react-router-dom";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getReservations, makeReservation } from "../services/api";
 
 export const fetchReservations = createAsyncThunk(
   "reservations/getReservation",
-  async (token) => {
-    const response = await getReservations({token});
-    if (!response) {
-      localStorage.clear();
-      redirect("/");
-      return;
+  async (token, {rejectWithValue}) => {
+    try{
+      const response = await getReservations({token});
+      return response;
+    }catch(e){
+      rejectWithValue(e.message);
     }
-    return response;
   }
 );
 
@@ -20,11 +18,6 @@ export const createReservation = createAsyncThunk("reservations/makeReservation"
     try{
       
       const response = await makeReservation({token, teacher, city, reservation_date});
-      if (!response) {
-        localStorage.clear();
-        redirect("/");
-        return;
-      }
       return response;
     }catch( e ){
       console.log("Exception:::", e);
@@ -42,18 +35,28 @@ const initialState = {
 const reservationsSlice = createSlice({
   name: "reservations",
   initialState,
-  reducers: {},
+  reducers: {
+    setIdle: (state) => {
+        state.status = "idle";
+      },
+  },
   extraReducers(builder) {
     builder
     .addCase(fetchReservations.fulfilled, (state, action) => {
       state.reservations = action.payload;
     })
+    .addCase(fetchReservations.rejected, (state, action) => {
+      console.log("FAILED HERE");
+      state.status = "FetchReservationFailed";
+      state.message = action.payload;
+      console.log("ERRIOR MESSAGE::",action.payload)
+    })
     .addCase(createReservation.pending, (state) => {
       state.status = "Loading";
     })
     .addCase(createReservation.fulfilled, (state, action) => {
-      console.log("SHOULD NOT SHOW ON ERROR::", action.payload);
-      state.status = "Success";
+      console.log("Success::", action.payload);
+      state.status = "CreateReservationSuccess";
     })
     .addCase(createReservation.rejected, (state, action) => {
       console.log("FAILED HERE");
@@ -64,4 +67,5 @@ const reservationsSlice = createSlice({
   },
 });
 
+export const { setIdle } = reservationsSlice.actions;
 export default reservationsSlice.reducer;

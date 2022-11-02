@@ -5,11 +5,7 @@ import { teachers, createTeacher, getTeacher, removeTeacher } from "../services/
 export const fetchteachers = createAsyncThunk("teachers/getTeachers", async (token, {rejectWithValue}) => {
   try{
     const response = await teachers({token});
-    if (!response) {
-      localStorage.clear();
-      redirect("/");
-      return;
-    }
+    
     return response;
   }catch(e){
 
@@ -22,11 +18,6 @@ export const newTeacher = createAsyncThunk("teachers/createTeacher", async ({tok
   try{
     
     const response = await createTeacher({token, teacher})
-    if (!response) {
-      localStorage.clear();
-      redirect("/");
-      return;
-    }
     return response;
     
   }catch(e){
@@ -39,11 +30,7 @@ export const singleTeacher = createAsyncThunk("teachers/getTeacher", async ({tok
     try{
       
       const response = await getTeacher({token, teacher_id})
-      if (!response) {
-        localStorage.clear();
-        redirect("/");
-        return;
-      }
+      
       return response;
 
     }catch(e){
@@ -55,11 +42,6 @@ export const singleTeacher = createAsyncThunk("teachers/getTeacher", async ({tok
   export const deleteTeacher = createAsyncThunk("teachers/deleteTeacher", async ({token, teacherId}, {rejectWithValue}) => {
     try{
       const response = await removeTeacher({token, teacherId})
-      if (!response) {
-        localStorage.clear();
-        redirect("/");
-        return;
-      }
       
       return {data: response, removedId: teacherId};
     }catch(e){
@@ -99,42 +81,38 @@ export const teacherSlice = createSlice({
       state.status = "Loading";
     })
     .addCase(newTeacher.fulfilled, (state, action) => {
-      state.status = "Ready";
+      state.status = "newTeacherSuccess";
       console.log("SUCCESS::", action.payload);
-      state.user = action.payload;
     })
     .addCase(newTeacher.rejected, (state, action) => {
       //an error occurred. get error action payload
-      state.status = "Ready";
+      state.status = "newTeacherFailed";
       console.log("ARE YOU ERROR:::", action.payload);
-      state.user = action.payload;
     })
     .addCase(singleTeacher.pending, (state) => {
         state.status = "Loading";
       })
     .addCase(singleTeacher.fulfilled, (state, action) => {
-        state.status = "Ready";
+        state.status = "SingleTeacherSuccess";
         console.log("SUCCESS::", action.payload);
-        state.user = action.payload;
     })
     .addCase(singleTeacher.rejected, (state, action) => {
         //an error occurred. get error action payload
-        state.status = "Ready";
+        state.status = "SingleTeacherFailed";
         console.log("ARE YOU ERROR:::", action.payload);
-        state.user = action.payload;
     })
     .addCase(deleteTeacher.pending, (state) => {
       state.status = "Loading";
     })
     .addCase(deleteTeacher.fulfilled, (state, action) => {
       console.log("SUCCESS::", action.payload);
-      state.status = "Ready";
+      state.status = "DeleteSuccess";
       console.log("SUCCESS::", action.payload);
       state.teachers = state.teachers.filter(teacher => teacher.id !== action.payload.removedId);
     })
     .addCase(deleteTeacher.rejected, (state, action) => {
       //an error occurred. get error action payload
-      state.status = "Ready";
+      state.status = "DeleteFailed";
       console.log("ARE YOU ERROR:::", action.payload);
 
     });
