@@ -121,6 +121,24 @@ export const getTeacher = async({token, teacher_id}) => {
     }
 }
 
+export const removeTeacher = async({token, teacherId}) => {
+    try {
+        const res = await fetch(`${baseUrl}/api/v1/teachers/${teacherId}`, {
+                        method: "DELETE",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        }
+                    });
+        if (res.status === 401){
+            return false;
+        }
+        return res.json();
+    }catch( e ){
+        throw new Error(e.message);
+    }
+}
+
 export const getReservations = async({token}) => {
     try {
         const res = await fetch(`${baseUrl}/api/v1/reservations`, {
