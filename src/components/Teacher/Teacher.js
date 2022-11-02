@@ -26,6 +26,7 @@ const Teacher = ({ id, name, title, photo }) => (
           image={photo}
           alt="profile photo"
           sx={{ width: 250 }}
+          style={{ borderRadius: "50%", objectFit: "cover" }}
         />
         <CardContent>
           <Typography
