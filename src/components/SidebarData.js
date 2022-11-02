@@ -8,7 +8,6 @@ import {
   PagesIcon,
   AuthIcon,
   WizardIcon,
-  ModalIcon,
   DeleteIcon,
 } from "./Icons";
 
@@ -16,6 +15,7 @@ import Reservations from "./Reservation/Reservations";
 
 import ReservationForm from "./Reservation/ReservationForm";
 import Teachers from "./Teacher/Teachers";
+import RemoveTeacher from "./Teacher/RemoveTeacher";
 import AddTeacher from "./Teacher/AddTeacher";
 
 export const SIDEBAR_DATA = [
@@ -52,6 +52,7 @@ export const SIDEBAR_DATA = [
     name: "Delete Teacher",
     path: "remove-teacher",
     icon: <DeleteIcon />,
-    component: <ReservationForm />,
+    component: <RemoveTeacher />,
   },
+
 ];

@@ -35,10 +35,10 @@ export default function Sidebar({ children }) {
   };
 
   const logout = () => {
-    dispatch(logoutUser(user.authorization))
+    dispatch(logoutUser(user.authorization));
     localStorage.clear();
     setUser(null);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -46,7 +46,7 @@ export default function Sidebar({ children }) {
         <SidebarWrapper>
           <SidebarLogoWrapper displaySidebar={displaySidebar}>
             {/* Logo wrapper starts */}
-            <SidebarLogo href="#">
+            <SidebarLogo href="#" style={{ textDecoration: "none" }}>
               <span className="app-brand-logo demo">
                 {/* <img src={BrandLogo} alt="Brand logo" /> */}
               </span>
@@ -54,7 +54,8 @@ export default function Sidebar({ children }) {
                 displaySidebar={displaySidebar}
                 className="app__brand__text"
               >
-                Appoint <br />Teacher
+                Appoint <br />
+                Teacher
               </SidebarBrand>
             </SidebarLogo>
             {/* Logo wrapper ends */}
@@ -68,16 +69,21 @@ export default function Sidebar({ children }) {
               </div>
             </SidebarToggler>
           </SidebarLogoWrapper>
-            {/* Render the SidebarItems component */}
+          {/* Render the SidebarItems component */}
           <SidebarItems displaySidebar={displaySidebar} />
         </SidebarWrapper>
       </SidebarContainer>
-            {/* Render the children */}
+      {/* Render the children */}
       <Children displaySidebar={displaySidebar}>{children}</Children>
 
       <div>
-        {user.data.name}
-        <Button variant="outlined" onClick={()=>logout()}>Logout</Button>
+        <Button
+          variant="outlined"
+          onClick={() => logout()}
+          className="my-2 mx-2"
+        >
+          Logout
+        </Button>
       </div>
     </React.Fragment>
   );

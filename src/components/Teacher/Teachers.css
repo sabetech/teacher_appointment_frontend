@@ -1,15 +1,18 @@
 .teachers {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .teacher-list {
-    display:flex;
-    justify-content: space-evenly;
-    list-style: none;
-    padding: 0;
-    flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 5rem;
 }
 
 .teacher-single {
-   margin: 5px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
 }
