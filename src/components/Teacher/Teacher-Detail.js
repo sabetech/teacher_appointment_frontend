@@ -15,7 +15,7 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-import { createReservation } from "../../features/reservationsSlice";
+import { createReservation, setIdle } from "../../features/reservationsSlice";
 import { Snackbar, Alert } from "@mui/material";
 
 import "./Teacher-detail.css";
@@ -45,6 +45,7 @@ const TeacherDetail = () => {
 
   useEffect(() => {
     if (createReservationStatus === "Success") {
+        dispatch(setIdle());
         setSnackOpen(true);
         navigate("/reservations");
     }
