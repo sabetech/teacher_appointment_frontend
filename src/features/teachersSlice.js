@@ -1,9 +1,15 @@
+import { redirect } from "react-router-dom";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { teachers, createTeacher, getTeacher } from "../services/api";
 
 export const fetchteachers = createAsyncThunk("teachers/getTeachers", async (token, {rejectWithValue}) => {
   try{
     const response = await teachers({token});
+    if (!response) {
+      localStorage.clear();
+      redirect("/");
+      return;
+    }
     return response;
   }catch(e){
 
@@ -16,6 +22,11 @@ export const newTeacher = createAsyncThunk("teachers/createTeacher", async ({tok
   try{
     
     const response = await createTeacher({token, teacher})
+    if (!response) {
+      localStorage.clear();
+      redirect("/");
+      return;
+    }
     return response;
     
   }catch(e){
@@ -28,6 +39,11 @@ export const singleTeacher = createAsyncThunk("teachers/getTeacher", async ({tok
     try{
       
       const response = await getTeacher({token, teacher_id})
+      if (!response) {
+        localStorage.clear();
+        redirect("/");
+        return;
+      }
       return response;
 
     }catch(e){
@@ -94,7 +110,7 @@ export const teacherSlice = createSlice({
   }
 });
 
-export const getTeacherList = (state) => state.teacher.teachers
+export const getTeacherList = (state) => state?.teacher?.teachers
 export const getStatus = (state) => state?.teacher?.status
 export const getError = (state) => state?.teacher?.error
 

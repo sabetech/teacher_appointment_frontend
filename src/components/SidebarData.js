@@ -8,7 +8,7 @@ import {
   PagesIcon,
   AuthIcon,
   WizardIcon,
-  ModalIcon,
+  DeleteIcon,
 } from "./Icons";
 
 import Reservations from "./Reservation/Reservations";
@@ -42,14 +42,14 @@ export const SIDEBAR_DATA = [
     id: 4,
     name: "Add Teacher",
     path: "addteacher",
-    icon: <RolesIcon />,
+    icon: <UserIcon />,
     component: <ReservationForm />,
   },
   {
     id: 5,
     name: "Delete Teacher",
     path: "remove-teacher",
-    icon: <RolesIcon />,
+    icon: <DeleteIcon />,
     component: <ReservationForm />,
   },
 

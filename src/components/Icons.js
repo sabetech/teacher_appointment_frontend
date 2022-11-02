@@ -11,6 +11,7 @@ import InputOutlinedIcon from "@mui/icons-material/InputOutlined";
 
 import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export {
   HomeOutlinedIcon as HomeIcon,
@@ -25,4 +26,5 @@ export {
   InputOutlinedIcon as ModalIcon,
   ArrowBackIcon,
   ArrowRightOutlinedIcon as ArrowIcon,
+  DeleteIcon
 };
