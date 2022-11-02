@@ -1,16 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchReservations } from "../../features/reservationsSlice";
+import { AuthContext } from "../../context/AuthContext";
 
 const Reservations = () => {
   const dispatch = useDispatch();
+  const {user} = useContext(AuthContext);
   const reservation = useSelector((state) => state.reservations);
-  const allReservations = reservation.reservations;
-  console.log(allReservations);
+  const [allReservations, setAllReservations] = useState([]);
+  
+  // console.log(allReservations);
 
   useEffect(() => {
-    dispatch(fetchReservations());
-  }, []);
+    setAllReservations(reservation.reservations);
+
+    console.log(allReservations);
+  }, [reservation]);
+
+  useEffect(() => {
+    dispatch(fetchReservations(user.authorization));
+  }, [fetchReservations]);
   return (
     <div>
       <h1>Reservations</h1>
@@ -27,7 +36,7 @@ const Reservations = () => {
           {allReservations.map((reservation) => (
             <tr>
               <th scope="row">{reservation.id}</th>
-              <td>{reservation.teacher_name}</td>
+              <td>{reservation.teacher.name}</td>
               <td>{reservation.reservation_date}</td>
               <td>
                 <button className="btn">Cancel</button>

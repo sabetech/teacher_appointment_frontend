@@ -130,7 +130,7 @@ export const getReservations = async({token}) => {
                             'Authorization': token
                         }
                     });
-        if (res.status == 401) {
+        if (res.status === 401) {
             return false;
         }
         return res.json();
@@ -140,7 +140,7 @@ export const getReservations = async({token}) => {
 }
 
 export const makeReservation = async({token, teacher, city, reservation_date}) => {
-    console.log(teacher, city, reservation_date);
+    
     try {
         const res = await fetch(`${baseUrl}/api/v1/reservations`, {
                         method: "POST",

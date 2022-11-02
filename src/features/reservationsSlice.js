@@ -4,14 +4,14 @@ import { getReservations, makeReservation } from "../services/api";
 
 export const fetchReservations = createAsyncThunk(
   "reservations/getReservation",
-  async ({token}) => {
+  async (token) => {
     const response = await getReservations({token});
     if (!response) {
       localStorage.clear();
       redirect("/");
       return;
     }
-    return response.json();
+    return response;
   }
 );
 
