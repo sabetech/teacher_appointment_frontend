@@ -29,7 +29,7 @@ const Reservations = () => {
             <th scope="col">#</th>
             <th scope="col">Teacher's name</th>
             <th scope="col">When</th>
-            <th scope="col">Action</th>
+            <th scope="col">City</th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@ const Reservations = () => {
               <td>{reservation.teacher.name}</td>
               <td>{reservation.reservation_date}</td>
               <td>
-                <button className="btn">Cancel</button>
+                {reservation.city}
               </td>
             </tr>
           ))}
