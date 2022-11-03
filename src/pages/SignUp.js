@@ -25,8 +25,6 @@ export default function SignUp() {
   };
 
   return (
-    <>
-      <SignUpPage name={onChangeName} email={onChangeEmail} password={onChangePassword} submit={signUp} />
-    </>
+    <SignUpPage name={onChangeName} email={onChangeEmail} password={onChangePassword} submit={signUp} />
   );
 }

@@ -5,13 +5,13 @@ import { AuthContext } from '../../context/AuthContext';
 import Teacher from './Teacher';
 import './Teachers.css';
 
-const Teachers = () => {
+function Teachers() {
   const dispatch = useDispatch();
   const teachers = useSelector(getTeacherList);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    dispatch(fetchteachers(user.authorization));
+    dispatch(fetchteachers(user?.authorization));
   }, [fetchteachers]);
 
   return (
@@ -36,6 +36,6 @@ const Teachers = () => {
       </div>
     </>
   );
-};
+}
 
 export default Teachers;

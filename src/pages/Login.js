@@ -25,8 +25,6 @@ export default function Login() {
   };
 
   return (
-    <>
-      <LoginPage username={onChangeUsername} password={onChangePassword} submit={signIn} />
-    </>
+    <LoginPage username={onChangeUsername} password={onChangePassword} submit={signIn} />
   );
 }

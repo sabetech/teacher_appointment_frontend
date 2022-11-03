@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const ReservationForm = () => {
+function ReservationForm() {
   const teachers = useSelector((state) => state.teacher.teachers);
   const dispatch = useDispatch();
   const createReservationStatus = useSelector(
@@ -47,7 +47,7 @@ const ReservationForm = () => {
   };
 
   const handleSubmit = () => {
-    const token = user.authorization;
+    const token = user?.authorization;
 
     const dateString = reservation_date;
 
@@ -169,6 +169,6 @@ const ReservationForm = () => {
       </Dialog>
     </>
   );
-};
+}
 
 export default ReservationForm;

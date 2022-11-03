@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
 import { DynamicItem, Sidebar, SideBarMenuItems } from './components';
@@ -9,6 +9,7 @@ import TeacherDetail from './components/Teacher/Teacher-Detail';
 
 function App() {
   const [user, setUser] = useState(null);
+  const userVal = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   useEffect(() => {
     const serializedUser = localStorage.getItem('user');
@@ -20,18 +21,16 @@ function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={userVal}>
       {!user ? (
-        <>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route
-              path="*"
-              element={<Navigate to="/" replace />}
-            />
-          </Routes>
-        </>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="*"
+            element={<Navigate to="/" replace />}
+          />
+        </Routes>
       ) : (
         <div id="main">
           <Sidebar>

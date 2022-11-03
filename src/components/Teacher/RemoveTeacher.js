@@ -5,14 +5,14 @@ import { getTeacherList, deleteTeacher } from '../../features/teachersSlice';
 import { AuthContext } from '../../context/AuthContext';
 import Teacher from './Teacher';
 
-const RemoveTeacher = () => {
+function RemoveTeacher() {
   const { user } = useContext(AuthContext);
   const teachers = useSelector(getTeacherList);
   const dispatch = useDispatch();
   // list teachers with a delete button
 
   const handleDelete = (teacher) => {
-    const token = user.authorization;
+    const token = user?.authorization;
     dispatch(deleteTeacher({ token, teacherId: teacher.id }));
   };
 
@@ -50,6 +50,6 @@ const RemoveTeacher = () => {
       </div>
     </>
   );
-};
+}
 
 export default RemoveTeacher;

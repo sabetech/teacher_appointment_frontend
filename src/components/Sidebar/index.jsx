@@ -35,7 +35,7 @@ export default function Sidebar({ children }) {
   };
 
   const logout = () => {
-    dispatch(logoutUser(user.authorization));
+    dispatch(logoutUser(user?.authorization));
     dispatch(clearStore());
     localStorage.clear();
     setUser(null);

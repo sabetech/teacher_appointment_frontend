@@ -66,7 +66,8 @@ export const ItemContainer = styled.li`
     background: #eaeced;
   }
   &.active {
-    background-color: #dbe4f3;
+    background-color: #98BF10;
+    color: #fff;
   }
 `;
 

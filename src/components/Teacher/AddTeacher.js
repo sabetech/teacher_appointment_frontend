@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { newTeacher } from '../../features/teachersSlice';
 
-const AddTeacher = () => {
+function AddTeacher() {
   const [name, setName] = useState('');
   const [title, setTitle] = useState('');
   const [bio, setBio] = useState('');
@@ -59,7 +59,7 @@ const AddTeacher = () => {
       upload_preset: 'ca9htrqo',
     };
 
-    const token = user.authorization;
+    const token = user?.authorization;
 
     dispatch(newTeacher({ token, teacher: request }));
   };
@@ -150,6 +150,6 @@ const AddTeacher = () => {
       </Paper>
     </div>
   );
-};
+}
 
 export default AddTeacher;

@@ -21,7 +21,7 @@ import { fetchteachers, getTeacherList } from '../../features/teachersSlice';
 
 import './Teacher-detail.css';
 
-const TeacherDetail = () => {
+function TeacherDetail() {
   const params = useParams();
   const teachers = useSelector(getTeacherList);
   const createReservationStatus = useSelector(
@@ -39,7 +39,7 @@ const TeacherDetail = () => {
 
   useEffect(() => {
     if (teachers.length == 0) {
-      dispatch(fetchteachers(user.authorization));
+      dispatch(fetchteachers(user?.authorization));
     }
   }, [dispatch]);
 
@@ -73,7 +73,7 @@ const TeacherDetail = () => {
   const handleSaveReservation = () => {
     setOpen(false);
 
-    const token = user.authorization;
+    const token = user?.authorization;
     const dateString = `${reservation_date.year()}-${reservation_date.month()}-${reservation_date.day()}`;
 
     dispatch(
@@ -216,6 +216,6 @@ const TeacherDetail = () => {
       </Snackbar>
     </div>
   );
-};
+}
 
 export default TeacherDetail;
