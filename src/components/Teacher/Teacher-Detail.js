@@ -25,7 +25,7 @@ const TeacherDetail = () => {
   const params = useParams();
   const teachers = useSelector(getTeacherList);
   const createReservationStatus = useSelector(
-    (state) => state.reservations.status
+    (state) => state.reservations.status,
   );
   const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
@@ -82,7 +82,7 @@ const TeacherDetail = () => {
         teacher,
         city,
         reservation_date: dateString,
-      })
+      }),
     );
   };
 
@@ -107,7 +107,16 @@ const TeacherDetail = () => {
             />
           </div>
           <DialogContentText sx={{ marginBottom: 5 }}>
-            To Reserve a Teacher <strong>[{teacher?.name}]</strong>, <br />
+            To Reserve a Teacher
+            {' '}
+            <strong>
+              [
+              {teacher?.name}
+              ]
+            </strong>
+            ,
+            {' '}
+            <br />
             Type in a City and Select a date
           </DialogContentText>
 
@@ -168,16 +177,24 @@ const TeacherDetail = () => {
               <h3>Profile</h3>
               <ul className="list-group">
                 <li className="list-group-item list-group-item-dark">
-                  Name: {teacher.name}
+                  Name:
+                  {' '}
+                  {teacher.name}
                 </li>
                 <li className="list-group-item list-group-item-light">
-                  Title: {teacher.title}
+                  Title:
+                  {' '}
+                  {teacher.title}
                 </li>
                 <li className="list-group-item list-group-item-dark">
-                  Work experience: {teacher.work_experience}
+                  Work experience:
+                  {' '}
+                  {teacher.work_experience}
                 </li>
                 <li className="list-group-item list-group-item-light">
-                  Bio {teacher.bio}
+                  Bio
+                  {' '}
+                  {teacher.bio}
                 </li>
               </ul>
             </div>

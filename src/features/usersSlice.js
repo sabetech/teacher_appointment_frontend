@@ -88,13 +88,11 @@ export const userSlice = createSlice({
       })
       .addCase(createUser.fulfilled, (state, action) => {
         state.status = 'Ready';
-        console.log('SUCCESS::', action.payload);
         state.user = action.payload;
       })
       .addCase(createUser.rejected, (state, action) => {
         // an error occurred. get error action payload
         state.status = 'Ready';
-        console.log('ARE YOU ERROR:::', action.payload);
         state.user = action.payload;
       })
       .addCase(logoutUser.pending, (state) => {
@@ -107,7 +105,6 @@ export const userSlice = createSlice({
       .addCase(logoutUser.rejected, (state, action) => {
         // an error occurred. get error action payload
         state.status = 'Ready';
-        console.log('ARE YOU ERROR:::', action.payload);
       });
   },
 });

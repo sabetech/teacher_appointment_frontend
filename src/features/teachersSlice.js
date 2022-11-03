@@ -16,7 +16,7 @@ export const fetchteachers = createAsyncThunk(
     } catch (e) {
       rejectWithValue('Exception:::', e.getMessage());
     }
-  }
+  },
 );
 
 export const newTeacher = createAsyncThunk(
@@ -28,7 +28,7 @@ export const newTeacher = createAsyncThunk(
     } catch (e) {
       rejectWithValue(`Exception:::${e}`);
     }
-  }
+  },
 );
 
 export const singleTeacher = createAsyncThunk(
@@ -41,7 +41,7 @@ export const singleTeacher = createAsyncThunk(
     } catch (e) {
       rejectWithValue(`Exception:::${e}`);
     }
-  }
+  },
 );
 
 export const deleteTeacher = createAsyncThunk(
@@ -54,7 +54,7 @@ export const deleteTeacher = createAsyncThunk(
     } catch (e) {
       rejectWithValue(`Exception:::${e}`);
     }
-  }
+  },
 );
 
 export const teacherSlice = createSlice({
@@ -110,7 +110,7 @@ export const teacherSlice = createSlice({
       .addCase(deleteTeacher.fulfilled, (state, action) => {
         state.status = 'DeleteSuccess';
         state.teachers = state.teachers.filter(
-          (teacher) => teacher.id !== action.payload.removedId
+          (teacher) => teacher.id !== action.payload.removedId,
         );
       })
       .addCase(deleteTeacher.rejected, (state, action) => {

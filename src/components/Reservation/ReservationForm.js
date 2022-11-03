@@ -19,7 +19,7 @@ const ReservationForm = () => {
   const teachers = useSelector((state) => state.teacher.teachers);
   const dispatch = useDispatch();
   const createReservationStatus = useSelector(
-    (state) => state.reservations.status
+    (state) => state.reservations.status,
   );
   const [reservation_date, setReservationDate] = useState(null);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
@@ -57,7 +57,7 @@ const ReservationForm = () => {
         teacher: selectedTeacher || teachers[0],
         city,
         reservation_date: dateString,
-      })
+      }),
     );
   };
 
@@ -85,8 +85,8 @@ const ReservationForm = () => {
                   <label>Select Teacher</label>
                   <br />
                   <select onChange={(e) => handleTeacherSelect(e.target.value)}>
-                    {teachers &&
-                      teachers.map((teacher) => (
+                    {teachers
+                      && teachers.map((teacher) => (
                         <option key={teacher.id} value={teacher.id}>
                           {teacher.name}
                         </option>
@@ -154,7 +154,7 @@ const ReservationForm = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {'Reservation Failed!'}
+          Reservation Failed!
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

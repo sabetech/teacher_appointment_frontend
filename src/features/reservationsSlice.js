@@ -14,12 +14,14 @@ export const fetchReservations = createAsyncThunk(
     } catch (e) {
       rejectWithValue(e.message);
     }
-  }
+  },
 );
 
 export const createReservation = createAsyncThunk(
   'reservations/makeReservation',
-  async ({ token, teacher, city, reservation_date }, { rejectWithValue }) => {
+  async ({
+    token, teacher, city, reservation_date,
+  }, { rejectWithValue }) => {
     try {
       const response = await makeReservation({
         token,
@@ -31,7 +33,7 @@ export const createReservation = createAsyncThunk(
     } catch (e) {
       rejectWithValue(e.message());
     }
-  }
+  },
 );
 
 export const deleteReservation = createAsyncThunk(
@@ -43,7 +45,7 @@ export const deleteReservation = createAsyncThunk(
     } catch (e) {
       rejectWithValue(e.message);
     }
-  }
+  },
 );
 
 const initialState = {
@@ -81,15 +83,13 @@ const reservationsSlice = createSlice({
       .addCase(createReservation.rejected, (state, action) => {
         state.status = 'ReservationFailed';
         state.message = 'You already have a reservation for this teacher!';
-        console.log(action.payload);
       })
       .addCase(deleteReservation.pending, (state) => {
         state.status = 'Loading';
       })
       .addCase(deleteReservation.fulfilled, (state, action) => {
-        console.log('Success::', action.payload);
         state.reservations = state.reservations.filter(
-          (reserve) => reserve.id !== action.payload.removedId
+          (reserve) => reserve.id !== action.payload.removedId,
         );
         state.status = 'DeleteReservationSuccess';
       })

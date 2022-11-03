@@ -1,4 +1,6 @@
-import { Paper, Snackbar, Alert, TextField } from '@mui/material';
+import {
+  Paper, Snackbar, Alert, TextField,
+} from '@mui/material';
 import Button from '@mui/material/Button';
 import { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -91,8 +93,11 @@ const AddTeacher = () => {
               accept="image/*"
               type="file"
               onChange={handlePhoto}
-            />{' '}
-            Image {teacherphoto?.name}
+            />
+            {' '}
+            Image
+            {' '}
+            {teacherphoto?.name}
           </Button>
           <TextField
             id="name"
