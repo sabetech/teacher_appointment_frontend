@@ -19,7 +19,7 @@ const Reservations = () => {
       dispatch(fetchReservations(user.authorization));
       return;
     }
-  }, [reservation]);
+  },[]);
 
   useEffect(() => {
     if (reservation.reservations.length > 0) {
