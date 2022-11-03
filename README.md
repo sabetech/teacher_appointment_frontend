@@ -14,13 +14,14 @@ users interact with the application in a meaningful way.
 **To get started with to project and to get a local copy up and running follow these simple example steps run :**
 
 - Clone Backend
-```git clone``` https://github.com/jheart-vic/appointment-app-back-end 
+```git clone https://github.com/jheart-vic/appointment-app-back-end```
 
 - Clone Frontend
-```git clone``` https://github.com/sabetech/teacher_appointment_frontend
+```git clone https://github.com/sabetech/teacher_appointment_frontend```
 
 - Open two terminal windows and 
-```cd appointment-app-back-end``` in one of the terminals
+```cd appointment-app-back-end``` in one of the terminals and get it to run. Refer to 
+[Link to Backend Readme](https://github.com/jheart-vic/appointment-app-back-end/blob/dev/README.md) on how to get the backend started
 
 - Open ```cd appointment_booking_frontend``` in the other terminal
 
@@ -33,8 +34,8 @@ users interact with the application in a meaningful way.
 ```npm start```
 ***
 
->>Notice that frontend server will be running on the ``port: 3000`` by default
->>Remember: The backend server will start on ```port: 3001```
+>Notice that frontend server will be running on the ``port: 3000`` by default
+Remember: The backend server will start on ```port: 3001```
 
 
 
