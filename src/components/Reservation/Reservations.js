@@ -6,6 +6,7 @@ import {
   deleteReservation,
 } from '../../features/reservationsSlice';
 import { AuthContext } from '../../context/AuthContext';
+import './Reservation.css';
 
 function Reservations() {
   const dispatch = useDispatch();
@@ -29,8 +30,11 @@ function Reservations() {
   };
 
   return (
-    <div>
-      <h1>Reservations</h1>
+    <div className="reservations">
+      <div className="header-info">
+        <h1 className="text-center header">Reservations</h1>
+        <small className="text-center">Here are your list of reservations!</small>
+      </div>
       <table className="table">
         <thead>
           <tr>

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   ItemsList,
   ItemContainer,
   ItemWrapper,
   ItemName,
-} from "./SidebarStyles";
+} from './SidebarStyles';
 
-import { SideBarMenuItems } from "..";
+import { SideBarMenuItems } from '..';
 
 const SidebarItems = ({ displaySidebar }) => {
   const [activeItem, setActiveItem] = useState(0);
@@ -44,7 +44,7 @@ const SidebarItems = ({ displaySidebar }) => {
           <Link to={itemData.path} style={{ textDecoration: "none" }}>
             <ItemWrapper>
               {itemData.icon}
-              <ItemName displaySidebar={displaySidebar}>
+              <ItemName displaySidebar={displaySidebar} className={itemData.id === activeItem ? "active" : ""}>
                 {itemData.name}
               </ItemName>
             </ItemWrapper>

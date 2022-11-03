@@ -67,20 +67,25 @@ export const ItemContainer = styled.li`
   }
   &.active {
     background-color: #98BF10;
-    color: #fff;
   }
 `;
 
 export const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
-  color: #7c7788;
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
 `;
 
 export const ItemName = styled.span`
   margin-left: ${({ displaySidebar }) => (displaySidebar ? '0.5rem' : '0')};
   display: ${({ displaySidebar }) => (displaySidebar ? 'block' : 'none')};
   text-transform: capitalize;
+  &.active {
+    color: #ffffff;
+  }
 `;
 
 // Sidebar Container

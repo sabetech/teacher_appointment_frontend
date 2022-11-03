@@ -16,3 +16,21 @@
   align-items: center;
   align-self: center;
 }
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.header {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.content {
+  margin-top: 5em;
+}

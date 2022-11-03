@@ -15,8 +15,11 @@ function Teachers() {
   }, [fetchteachers]);
 
   return (
-    <>
-      <h1 className="text-center">Teachers</h1>
+    <div className="content">
+      <div className="header-info">
+        <h1 className="text-center header">Teachers</h1>
+        <small className="text-center">Click to Select your teacher!</small>
+      </div>
       <div className="teachers">
         <div className="teacher-list">
           {
@@ -34,7 +37,7 @@ function Teachers() {
             }
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

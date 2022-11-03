@@ -15,7 +15,7 @@ function Teacher({
         <Card
           sx={{ width: 400, height: 400 }}
           style={{
-            borderRadius: '50%',
+            borderRadius: '5%',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

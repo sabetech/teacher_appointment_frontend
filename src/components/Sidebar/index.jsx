@@ -65,11 +65,7 @@ export default function Sidebar({ children }) {
             <SidebarToggler
               displaySidebar={displaySidebar}
               onClick={handleSidebarDisplay}
-            >
-              <div className="outer__circle">
-                <div className="inner__circle" />
-              </div>
-            </SidebarToggler>
+            />
           </SidebarLogoWrapper>
           {/* Render the SidebarItems component */}
           <SidebarItems displaySidebar={displaySidebar} />

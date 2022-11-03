@@ -83,7 +83,7 @@ function AddTeacher() {
         <h2>Add Teacher</h2>
         <form className="form">
           <Button
-            variant="contained"
+            variant="outlined"
             component="label"
             sx={{ marginBottom: 2 }}
           >
@@ -130,7 +130,10 @@ function AddTeacher() {
             sx={{ marginBottom: 2 }}
             onChange={(e) => handleXp(e.target.value)}
           />
-          <Button variant="contained" onClick={() => submit()}>
+          <Button variant="contained" onClick={() => submit()} 
+              sx={{
+                backgroundColor: '#98BF10'
+              }}>
             Submit
           </Button>
         </form>
