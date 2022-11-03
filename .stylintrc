@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "function-calc-no-invalid": null,
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignore": [
+          "function-calc-no-invalid",
+          "no-descending-specificity"
+        ]
+      }
+    ]
+  }
+}

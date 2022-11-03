@@ -1,5 +1,5 @@
-export { default as Sidebar } from "./Sidebar";
-export { default as SidebarItems } from "./Sidebar/SidebarItems";
-export { default as DynamicItem } from "./Routes/[item]";
+export { default as Sidebar } from './Sidebar';
+export { default as SidebarItems } from './Sidebar/SidebarItems';
+export { default as DynamicItem } from './Routes/[item]';
 
-export { SIDEBAR_DATA as SideBarMenuItems } from "./SidebarData";
+export { SIDEBAR_DATA as SideBarMenuItems } from './SidebarData';

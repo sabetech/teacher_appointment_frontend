@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getTeacherList, fetchteachers } from "../../features/teachersSlice";
-import { AuthContext } from "../../context/AuthContext";
-import Teacher from "./Teacher";
-import "./Teachers.css";
+import React, { useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTeacherList, fetchteachers } from '../../features/teachersSlice';
+import { AuthContext } from '../../context/AuthContext';
+import Teacher from './Teacher';
+import './Teachers.css';
 
 const Teachers = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,8 @@ const Teachers = () => {
       <div className="teachers">
         <div className="teacher-list">
           {
-          (teachers ?
-            teachers.map((teacher) => (
+          (teachers
+            ? teachers.map((teacher) => (
               <div className="teacher-single" key={teacher.id}>
                 <Teacher
                   id={teacher.id}

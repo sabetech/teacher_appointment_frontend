@@ -1,15 +1,15 @@
-import { useContext, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getTeacherList, deleteTeacher } from "../../features/teachersSlice";
-import { AuthContext } from "../../context/AuthContext";
-import Teacher from "./Teacher";
-import { Button } from "@mui/material";
+import { useContext, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Button } from '@mui/material';
+import { getTeacherList, deleteTeacher } from '../../features/teachersSlice';
+import { AuthContext } from '../../context/AuthContext';
+import Teacher from './Teacher';
 
 const RemoveTeacher = () => {
   const { user } = useContext(AuthContext);
   const teachers = useSelector(getTeacherList);
   const dispatch = useDispatch();
-  //list teachers with a delete button
+  // list teachers with a delete button
 
   const handleDelete = (teacher) => {
     const token = user.authorization;
@@ -23,8 +23,8 @@ const RemoveTeacher = () => {
       <h1 className="text-center">Remove Teachers</h1>
       <div className="teachers">
         <div className="teacher-list">
-          {(teachers &&
-            teachers.map((teacher) => (
+          {(teachers
+            && teachers.map((teacher) => (
               <div
                 className="teacher-single"
                 key={teacher.id}
@@ -40,7 +40,7 @@ const RemoveTeacher = () => {
                   variant="outlined"
                   color="error"
                   onClick={() => handleDelete(teacher)}
-                  style={{ marginTop: "10px" }}
+                  style={{ marginTop: '10px' }}
                 >
                   Delete
                 </Button>

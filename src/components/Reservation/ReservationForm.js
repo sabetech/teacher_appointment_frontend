@@ -1,16 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { createReservation, setIdle } from "../../features/reservationsSlice";
-import { AuthContext } from "../../context/AuthContext";
-import "./ReservationForm.css";
-import { Snackbar, Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { createReservation, setIdle } from '../../features/reservationsSlice';
+import { AuthContext } from '../../context/AuthContext';
+import './ReservationForm.css';
+import { Snackbar, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const ReservationForm = () => {
   const teachers = useSelector((state) => state.teacher.teachers);
   const dispatch = useDispatch();
   const createReservationStatus = useSelector(
-    (state) => state.reservations.status
+    (state) => state.reservations.status,
   );
   const [reservation_date, setReservationDate] = useState(null);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
@@ -20,16 +20,16 @@ const ReservationForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (createReservationStatus === "CreateReservationSuccess") {
+    if (createReservationStatus === 'CreateReservationSuccess') {
       dispatch(setIdle());
       setSnackOpen(true);
     }
   }, [createReservationStatus]);
 
   const handleSubmit = () => {
-    let token = user.authorization;
+    const token = user.authorization;
 
-    let dateString = reservation_date;
+    const dateString = reservation_date;
 
     dispatch(
       createReservation({
@@ -37,21 +37,21 @@ const ReservationForm = () => {
         teacher: selectedTeacher || teachers[0],
         city,
         reservation_date: dateString,
-      })
+      }),
     );
 
-    navigate("/reservations");
+    navigate('/reservations');
   };
 
   const handleTeacherSelect = (text) => {
-    let teacherId = parseInt(text);
+    const teacherId = parseInt(text);
     const sel_teacher = teachers.find((teacher) => teacher.id === teacherId);
 
     setSelectedTeacher(sel_teacher);
   };
 
   const handleSnackClose = () => {
-    navigate("/reservations");
+    navigate('/reservations');
     setSnackOpen(false);
   };
 
@@ -67,8 +67,8 @@ const ReservationForm = () => {
                   <label>Select Teacher</label>
                   <br />
                   <select onChange={(e) => handleTeacherSelect(e.target.value)}>
-                    {teachers &&
-                      teachers.map((teacher) => (
+                    {teachers
+                      && teachers.map((teacher) => (
                         <option key={teacher.id} value={teacher.id}>
                           {teacher.name}
                         </option>
@@ -107,7 +107,7 @@ const ReservationForm = () => {
                 type="submit"
                 className="btn btn-primary"
                 onClick={handleSubmit}
-                style={{ backgroundColor: "blue" }}
+                style={{ backgroundColor: 'blue' }}
               >
                 Submit
               </button>
@@ -123,7 +123,7 @@ const ReservationForm = () => {
         <Alert
           onClose={handleSnackClose}
           severity="success"
-          sx={{ width: "100%" }}
+          sx={{ width: '100%' }}
         >
           Reservation has been created Successfully
         </Alert>

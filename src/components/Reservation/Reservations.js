@@ -1,11 +1,11 @@
-import React, { useEffect, useContext, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useContext, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   fetchReservations,
   deleteReservation,
-} from "../../features/reservationsSlice";
-import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+} from '../../features/reservationsSlice';
+import { AuthContext } from '../../context/AuthContext';
 
 const Reservations = () => {
   const navigate = useNavigate();
@@ -17,7 +17,6 @@ const Reservations = () => {
   useEffect(() => {
     if (reservation.reservations.length == 0) {
       dispatch(fetchReservations(user.authorization));
-      return;
     }
   }, [reservation]);
 
@@ -28,10 +27,9 @@ const Reservations = () => {
   }, [fetchReservations]);
 
   const handleDelete = (reservation) => {
-    console.log(reservation.id);
     const token = user.authorization;
     dispatch(deleteReservation({ token, reservationId: reservation.id }));
-    navigate("/teachers");
+    navigate('/teachers');
     window.location.reload();
   };
 
@@ -58,11 +56,12 @@ const Reservations = () => {
                 <td>{reservation.city}</td>
                 <td>
                   <button
+                    type="button"
                     className="btn btn-danger"
                     onClick={() => {
                       handleDelete(reservation);
                     }}
-                    style={{ backgroundColor: "red" }}
+                    style={{ backgroundColor: 'red' }}
                   >
                     Cancel
                   </button>

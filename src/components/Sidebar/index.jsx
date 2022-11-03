@@ -1,5 +1,5 @@
 // src/components/Sidebar/index.jsx
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from 'react';
 
 import {
   Children,
@@ -9,14 +9,14 @@ import {
   SidebarLogo,
   SidebarBrand,
   SidebarToggler,
-} from "./SidebarStyles";
-import { Button } from "@mui/material";
-import { AuthContext } from "../../context/AuthContext";
-import { logoutUser } from "../../features/usersSlice";
+} from './SidebarStyles';
+import { Button } from '@mui/material';
+import { AuthContext } from '../../context/AuthContext';
+import { logoutUser } from '../../features/usersSlice';
 // import BrandLogo from "./BrandLogo.svg";
 
-import { SidebarItems } from "..";
-import { useDispatch } from "react-redux";
+import { SidebarItems } from '..';
+import { useDispatch } from 'react-redux';
 
 const MOBILE_VIEW = window.innerWidth < 468;
 
@@ -41,12 +41,12 @@ export default function Sidebar({ children }) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <SidebarContainer displaySidebar={displaySidebar}>
         <SidebarWrapper>
           <SidebarLogoWrapper displaySidebar={displaySidebar}>
             {/* Logo wrapper starts */}
-            <SidebarLogo href="#" style={{ textDecoration: "none" }}>
+            <SidebarLogo href="#" style={{ textDecoration: 'none' }}>
               <span className="app-brand-logo demo">
                 {/* <img src={BrandLogo} alt="Brand logo" /> */}
               </span>
@@ -54,7 +54,8 @@ export default function Sidebar({ children }) {
                 displaySidebar={displaySidebar}
                 className="app__brand__text"
               >
-                Appoint <br />
+                Appoint
+                <br />
                 Teacher
               </SidebarBrand>
             </SidebarLogo>
@@ -85,6 +86,6 @@ export default function Sidebar({ children }) {
           Logout
         </Button>
       </div>
-    </React.Fragment>
+    </>
   );
 }
