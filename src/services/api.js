@@ -1,4 +1,4 @@
-const baseUrl = 'http://127.0.0.1:3001';
+const baseUrl = 'https://intense-headland-75088.herokuapp.com';
 
 export const login = async ({ email, password }) => {
   try {
@@ -120,7 +120,7 @@ const saveTeacherPhoto = async (formData) => {
       {
         method: 'POST',
         body: formData,
-      },
+      }
     );
 
     return response.json();
