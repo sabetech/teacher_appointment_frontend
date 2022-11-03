@@ -4,15 +4,14 @@ body {
 
 .card {
   border: none;
-
   position: relative;
   overflow: hidden;
   border-radius: 8px;
   cursor: pointer;
 }
 
-.card:before {
-  content: "";
+.card::before {
+  content: '';
   position: absolute;
   left: 0;
   top: 0;
@@ -24,8 +23,8 @@ body {
   transform-origin: bottom;
 }
 
-.card:after {
-  content: "";
+.card::after {
+  content: '';
   position: absolute;
   left: 0;
   top: 0;
@@ -64,16 +63,16 @@ body {
   height: 40px;
 }
 
-.buttons button:nth-child(1):hover {
-  border: 1px solid #8e24aa !important;
-  color: #fff;
-  height: 40px;
-  background-color: #8e24aa;
-}
-
 .buttons button:nth-child(2) {
   border: 1px solid #8e24aa !important;
   background-color: #8e24aa;
   color: #fff;
   height: 40px;
+}
+
+.buttons button:nth-child(1):hover {
+  border: 1px solid #8e24aa !important;
+  color: #fff;
+  height: 40px;
+  background-color: #8e24aa;
 }

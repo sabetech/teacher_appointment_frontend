@@ -1,23 +1,25 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import "./Teachers.css";
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import './Teachers.css';
 
-const Teacher = ({ id, name, title, photo }) => (
-  <div style={{ cursor: "pointer" }}>
-    <Link to={`/teachers/details/${id}`} style={{ textDecoration: "none" }}>
+const Teacher = ({
+  id, name, title, photo,
+}) => (
+  <div style={{ cursor: 'pointer' }}>
+    <Link to={`/teachers/details/${id}`} style={{ textDecoration: 'none' }}>
       <Card
         sx={{ width: 400, height: 400 }}
         style={{
-          borderRadius: "50%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+          borderRadius: '50%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
         }}
       >
         <CardMedia
@@ -26,7 +28,7 @@ const Teacher = ({ id, name, title, photo }) => (
           image={photo}
           alt="profile photo"
           sx={{ width: 250 }}
-          style={{ borderRadius: "50%" }}
+          style={{ borderRadius: '50%' }}
         />
         <CardContent>
           <Typography
@@ -34,9 +36,9 @@ const Teacher = ({ id, name, title, photo }) => (
             variant="h5"
             component="div"
             style={{
-              textAlign: "center",
-              fontWeight: "bold",
-              textUnderline: "none",
+              textAlign: 'center',
+              fontWeight: 'bold',
+              textUnderline: 'none',
             }}
           >
             {name}
@@ -44,11 +46,13 @@ const Teacher = ({ id, name, title, photo }) => (
           <Typography
             variant="body2"
             color="text.secondary"
-            style={{ textAlign: "center" }}
+            style={{ textAlign: 'center' }}
           >
-            TITLE: {title}
+            TITLE:
+            {' '}
+            {title}
           </Typography>
-          
+
         </CardContent>
       </Card>
     </Link>

@@ -1,8 +1,6 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchteachers, getTeacherList } from "../../features/teachersSlice";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useContext, useEffect, useState } from 'react';
 import {
   Button,
   Dialog,
@@ -11,26 +9,29 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-} from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-import { createReservation, setIdle } from "../../features/reservationsSlice";
-import { Snackbar, Alert } from "@mui/material";
+  Snackbar,
+  Alert,
+} from '@mui/material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { createReservation, setIdle } from '../../features/reservationsSlice';
+import { AuthContext } from '../../context/AuthContext';
+import { fetchteachers, getTeacherList } from '../../features/teachersSlice';
 
-import "./Teacher-detail.css";
+import './Teacher-detail.css';
 
 const TeacherDetail = () => {
   const params = useParams();
   const teachers = useSelector(getTeacherList);
   const createReservationStatus = useSelector(
-    (state) => state.reservations.status
+    (state) => state.reservations.status,
   );
   const { user } = useContext(AuthContext);
   const dispatch = useDispatch();
   const teacherId = parseInt(params.id);
   const [teacher, setTeacher] = useState(null);
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState('');
   const [reservation_date, setDate] = useState(null);
   const [open, setOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
@@ -39,23 +40,20 @@ const TeacherDetail = () => {
   useEffect(() => {
     if (teachers.length == 0) {
       dispatch(fetchteachers(user.authorization));
-      return;
     }
   }, [dispatch]);
 
   useEffect(() => {
-    if (createReservationStatus === "CreateReservationSuccess") {
-        dispatch(setIdle());
-        setSnackOpen(true);
-        navigate("/reservations");
+    if (createReservationStatus === 'CreateReservationSuccess') {
+      dispatch(setIdle());
+      setSnackOpen(true);
+      navigate('/reservations');
     }
 
-    if (createReservationStatus === "ReservationFailed") {
-      alert("This teacher has already been reserved. Choose another!");
+    if (createReservationStatus === 'ReservationFailed') {
+      alert('This teacher has already been reserved. Choose another!');
       dispatch(setIdle());
     }
-
-
   }, [createReservationStatus]);
 
   useEffect(() => {
@@ -75,16 +73,16 @@ const TeacherDetail = () => {
   const handleSaveReservation = () => {
     setOpen(false);
 
-    let token = user.authorization;
-    let dateString =
-      reservation_date.year() +
-      "-" +
-      reservation_date.month() +
-      "-" +
-      reservation_date.day();
+    const token = user.authorization;
+    const dateString = `${reservation_date.year()}-${reservation_date.month()}-${reservation_date.day()}`;
 
     dispatch(
-      createReservation({ token, teacher, city, reservation_date: dateString })
+      createReservation({
+        token,
+        teacher,
+        city,
+        reservation_date: dateString,
+      }),
     );
   };
 
@@ -96,7 +94,7 @@ const TeacherDetail = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: 'flex' }}>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Reserve</DialogTitle>
         <DialogContent>
@@ -109,7 +107,16 @@ const TeacherDetail = () => {
             />
           </div>
           <DialogContentText sx={{ marginBottom: 5 }}>
-            To Reserve a Teacher <strong>[{teacher?.name}]</strong>, <br />
+            To Reserve a Teacher
+            {' '}
+            <strong>
+              [
+              {teacher?.name}
+              ]
+            </strong>
+            ,
+            {' '}
+            <br />
             Type in a City and Select a date
           </DialogContentText>
 
@@ -137,8 +144,12 @@ const TeacherDetail = () => {
           </LocalizationProvider>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSaveReservation}>Reserve</Button>
+          <Button type="button" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button type="button" onClick={handleSaveReservation}>
+            Reserve
+          </Button>
         </DialogActions>
       </Dialog>
 
@@ -151,9 +162,10 @@ const TeacherDetail = () => {
                 width="100"
                 className="rounded-circle"
                 alt={teacher.name}
-                style={{ height: "400px", width: "400px", objectFit: "cover" }}
+                style={{ height: '400px', width: '400px', objectFit: 'cover' }}
               />
               <button
+                type="button"
                 className="bg-secondary p-1 px-4 rounded text-white my-3"
                 onClick={() => handleReserve()}
               >
@@ -165,16 +177,24 @@ const TeacherDetail = () => {
               <h3>Profile</h3>
               <ul className="list-group">
                 <li className="list-group-item list-group-item-dark">
-                  Name: {teacher.name}
+                  Name:
+                  {' '}
+                  {teacher.name}
                 </li>
                 <li className="list-group-item list-group-item-light">
-                  Title: {teacher.title}
+                  Title:
+                  {' '}
+                  {teacher.title}
                 </li>
                 <li className="list-group-item list-group-item-dark">
-                  Work experience: {teacher.work_experience}
+                  Work experience:
+                  {' '}
+                  {teacher.work_experience}
                 </li>
                 <li className="list-group-item list-group-item-light">
-                  Bio {teacher.bio}
+                  Bio
+                  {' '}
+                  {teacher.bio}
                 </li>
               </ul>
             </div>
@@ -189,7 +209,7 @@ const TeacherDetail = () => {
         <Alert
           onClose={handleSnackClose}
           severity="success"
-          sx={{ width: "100%" }}
+          sx={{ width: '100%' }}
         >
           Teacher has been reserved Successfully!
         </Alert>

@@ -1,17 +1,18 @@
-import { Paper, Snackbar, Alert, TextField } from "@mui/material";
-import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
-import { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { newTeacher } from "../../features/teachersSlice";
+import {
+  Paper, Snackbar, Alert, TextField,
+} from '@mui/material';
+import Button from '@mui/material/Button';
+import { useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import { newTeacher } from '../../features/teachersSlice';
 
 const AddTeacher = () => {
-  const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
-  const [bio, setBio] = useState("");
-  const [experience, setExperience] = useState("");
+  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
+  const [bio, setBio] = useState('');
+  const [experience, setExperience] = useState('');
   const [teacherphoto, setPhoto] = useState(null);
   const [snackOpen, setSnackOpen] = useState(false);
   const { user } = useContext(AuthContext);
@@ -40,9 +41,8 @@ const AddTeacher = () => {
   };
 
   useEffect(() => {
-    
-    if (teacherSaveStatus === "newTeacherSuccess") {
-      navigate("/teachers");
+    if (teacherSaveStatus === 'newTeacherSuccess') {
+      navigate('/teachers');
       setSnackOpen(true);
     }
   }, [teacherSaveStatus]);
@@ -51,12 +51,12 @@ const AddTeacher = () => {
 
   const submit = () => {
     const request = {
-      name: name,
-      title: title,
-      bio: bio,
-      experience: experience,
+      name,
+      title,
+      bio,
+      experience,
       photo: teacherphoto,
-      upload_preset: "ca9htrqo",
+      upload_preset: 'ca9htrqo',
     };
 
     const token = user.authorization;
@@ -68,14 +68,14 @@ const AddTeacher = () => {
     <div className="App">
       <Paper
         sx={{
-          bgcolor: "background.paper",
+          bgcolor: 'background.paper',
           boxShadow: 1,
           borderRadius: 2,
           minWidth: 300,
           minHeight: 300,
           marginLeft: 3,
           marginRight: 3,
-          marginTop: "20%",
+          marginTop: '20%',
           paddingTop: 5,
           paddingBottom: 5,
         }}
@@ -93,8 +93,11 @@ const AddTeacher = () => {
               accept="image/*"
               type="file"
               onChange={handlePhoto}
-            />{" "}
-            Image {teacherphoto?.name}
+            />
+            {' '}
+            Image
+            {' '}
+            {teacherphoto?.name}
           </Button>
           <TextField
             id="name"
@@ -139,7 +142,7 @@ const AddTeacher = () => {
           <Alert
             onClose={handleSnackClose}
             severity="success"
-            sx={{ width: "100%" }}
+            sx={{ width: '100%' }}
           >
             Teacher Has been Created Successfully!
           </Alert>

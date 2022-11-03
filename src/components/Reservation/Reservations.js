@@ -1,23 +1,21 @@
-import React, { useEffect, useContext, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useContext, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   fetchReservations,
   deleteReservation,
-} from "../../features/reservationsSlice";
-import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+} from '../../features/reservationsSlice';
+import { AuthContext } from '../../context/AuthContext';
 
 const Reservations = () => {
-
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
   const reservation = useSelector((state) => state.reservations);
   const [allReservations, setAllReservations] = useState([]);
 
   useEffect(() => {
-      dispatch(fetchReservations(user.authorization));
-    
-  },[fetchReservations]);
+    dispatch(fetchReservations(user.authorization));
+  }, [fetchReservations]);
 
   useEffect(() => {
     if (reservation.reservations.length > 0) {
@@ -26,7 +24,6 @@ const Reservations = () => {
   }, [reservation]);
 
   const handleDelete = (reservation) => {
-  
     const token = user.authorization;
     dispatch(deleteReservation({ token, reservationId: reservation.id }));
   };
@@ -54,11 +51,12 @@ const Reservations = () => {
                 <td>{reservation.city}</td>
                 <td>
                   <button
+                    type="button"
                     className="btn btn-danger"
                     onClick={() => {
                       handleDelete(reservation);
                     }}
-                    style={{ backgroundColor: "red" }}
+                    style={{ backgroundColor: 'red' }}
                   >
                     Cancel
                   </button>

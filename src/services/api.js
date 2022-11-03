@@ -1,23 +1,23 @@
-const baseUrl = "http://127.0.0.1:3001";
+const baseUrl = 'http://127.0.0.1:3001';
 
 export const login = async ({ email, password }) => {
   try {
     const response = await fetch(`${baseUrl}/users/sign_in`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         user: {
-          email: email,
-          password: password,
+          email,
+          password,
         },
       }),
     });
     const data = await response.json();
     return {
       data,
-      header: response.headers.get("Authorization"),
+      header: response.headers.get('Authorization'),
     };
   } catch (e) {
     throw new Error(e.message);
@@ -27,22 +27,22 @@ export const login = async ({ email, password }) => {
 export const signup = async ({ name, email, password }) => {
   try {
     const response = await fetch(`${baseUrl}/users`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         user: {
-          name: name,
-          email: email,
-          password: password,
+          name,
+          email,
+          password,
         },
       }),
     });
     const data = await response.json();
     return {
       data,
-      header: response.headers.get("Authorization"),
+      header: response.headers.get('Authorization'),
     };
   } catch (e) {
     throw new Error(e.message);
@@ -52,9 +52,9 @@ export const signup = async ({ name, email, password }) => {
 export const logout = async ({ token }) => {
   try {
     const response = await fetch(`${baseUrl}/users/sign_out`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
     });
@@ -69,7 +69,7 @@ export const teachers = async ({ token }) => {
   try {
     const res = await fetch(`${baseUrl}/api/v1/teachers`, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
     });
@@ -85,15 +85,15 @@ export const teachers = async ({ token }) => {
 export const createTeacher = async ({ token, teacher }) => {
   try {
     const formData = new FormData();
-    formData.append("file", teacher.photo);
-    formData.append("upload_preset", teacher.upload_preset);
+    formData.append('file', teacher.photo);
+    formData.append('upload_preset', teacher.upload_preset);
 
     const responseImage = await saveTeacherPhoto(formData);
 
     const res = await fetch(`${baseUrl}/api/v1/teachers`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
       body: JSON.stringify({
@@ -116,23 +116,25 @@ export const createTeacher = async ({ token, teacher }) => {
 const saveTeacherPhoto = async (formData) => {
   try {
     const response = await fetch(
-      "https://api.cloudinary.com/v1_1/ddukvxuai/image/upload",
+      'https://api.cloudinary.com/v1_1/ddukvxuai/image/upload',
       {
-        method: "POST",
+        method: 'POST',
         body: formData,
-      }
+      },
     );
 
     return response.json();
-  } catch (e) {}
+  } catch (e) {
+    throw new Error(e.message);
+  }
 };
 
 export const getTeacher = async ({ token, teacher_id }) => {
   try {
     const res = await fetch(`${baseUrl}/api/v1/teachers/${teacher_id}`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
     });
@@ -148,9 +150,9 @@ export const getTeacher = async ({ token, teacher_id }) => {
 export const removeTeacher = async ({ token, teacherId }) => {
   try {
     const res = await fetch(`${baseUrl}/api/v1/teachers/${teacherId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
     });
@@ -166,9 +168,9 @@ export const removeTeacher = async ({ token, teacherId }) => {
 export const getReservations = async ({ token }) => {
   try {
     const res = await fetch(`${baseUrl}/api/v1/reservations`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
     });
@@ -189,14 +191,14 @@ export const makeReservation = async ({
 }) => {
   try {
     const res = await fetch(`${baseUrl}/api/v1/reservations`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
       body: JSON.stringify({
-        reservation_date: reservation_date,
-        city: city,
+        reservation_date,
+        city,
         teacher_id: teacher.id,
       }),
     });
@@ -205,7 +207,7 @@ export const makeReservation = async ({
     }
 
     if (res.status === 500) {
-      throw new Error("You already have a reservation for this teacher");
+      throw new Error('You already have a reservation for this teacher');
     }
 
     return res.json();
@@ -215,12 +217,11 @@ export const makeReservation = async ({
 };
 
 export const removeReservation = async ({ token, reservationId }) => {
-  console.log(reservationId);
   try {
     const res = await fetch(`${baseUrl}/api/v1/reservations/${reservationId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: token,
       },
     });

@@ -1,20 +1,20 @@
-import "./App.css";
-import React, { useEffect, useState } from "react";
-import { AuthContext } from "./context/AuthContext";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { DynamicItem, Sidebar, SideBarMenuItems } from "./components";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import TeacherDetail from "./components/Teacher/Teacher-Detail";
+import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { AuthContext } from './context/AuthContext';
+import { DynamicItem, Sidebar, SideBarMenuItems } from './components';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import TeacherDetail from './components/Teacher/Teacher-Detail';
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const serializedUser = localStorage.getItem("user");
+    const serializedUser = localStorage.getItem('user');
     if (serializedUser) {
       setUser(JSON.parse(serializedUser));
-    }else{
+    } else {
       setUser(null);
     }
   }, []);
@@ -27,8 +27,8 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route
-                path="*"
-                element={<Navigate to="/" replace />}
+              path="*"
+              element={<Navigate to="/" replace />}
             />
           </Routes>
         </>
@@ -36,27 +36,27 @@ function App() {
         <div id="main">
           <Sidebar>
             <Routes>
-              {SideBarMenuItems &&
-                SideBarMenuItems.map((item, index) => (
+              {SideBarMenuItems
+                && SideBarMenuItems.map((item, index) => (
                   <Route
                     key={index}
                     path={item.path}
-                    element={
+                    element={(
                       <DynamicItem
                         page={item.name}
                         component={item.component}
                       />
-                    }
+                    )}
                   />
                 ))}
               <Route
                 path="/teachers/details/:id"
-                element={
+                element={(
                   <DynamicItem
                     page="teacher details"
                     component={<TeacherDetail />}
                   />
-                }
+                )}
               />
               <Route
                 path="*"

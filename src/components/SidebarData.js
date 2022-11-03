@@ -9,48 +9,48 @@ import {
   AuthIcon,
   WizardIcon,
   DeleteIcon,
-} from "./Icons";
+} from './Icons';
 
-import Reservations from "./Reservation/Reservations";
+import Reservations from './Reservation/Reservations';
 
-import ReservationForm from "./Reservation/ReservationForm";
-import Teachers from "./Teacher/Teachers";
-import RemoveTeacher from "./Teacher/RemoveTeacher";
-import AddTeacher from "./Teacher/AddTeacher";
+import ReservationForm from './Reservation/ReservationForm';
+import Teachers from './Teacher/Teachers';
+import RemoveTeacher from './Teacher/RemoveTeacher';
+import AddTeacher from './Teacher/AddTeacher';
 
 export const SIDEBAR_DATA = [
   {
     id: 1,
-    name: "Teachers",
-    path: "/",
+    name: 'Teachers',
+    path: '/',
     icon: <HomeIcon />,
-    component: <Teachers />
+    component: <Teachers />,
   },
   {
     id: 2,
-    name: "My Reservations",
-    path: "reservations",
+    name: 'My Reservations',
+    path: 'reservations',
     icon: <LayoutIcon />,
     component: <Reservations />,
   },
   {
     id: 3,
-    name: "Book appointment",
-    path: "reserve",
+    name: 'Book appointment',
+    path: 'reserve',
     icon: <RolesIcon />,
     component: <ReservationForm />,
   },
   {
     id: 4,
-    name: "Add Teacher",
-    path: "addteacher",
+    name: 'Add Teacher',
+    path: 'addteacher',
     icon: <UserIcon />,
     component: <AddTeacher />,
   },
   {
     id: 5,
-    name: "Delete Teacher",
-    path: "remove-teacher",
+    name: 'Delete Teacher',
+    path: 'remove-teacher',
     icon: <DeleteIcon />,
     component: <RemoveTeacher />,
   },
