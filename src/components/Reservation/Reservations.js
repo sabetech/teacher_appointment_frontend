@@ -14,13 +14,13 @@ const Reservations = () => {
       dispatch(fetchReservations(user.authorization));
       return;
     }
-  },[reservation]);
+  },[]);
 
   useEffect(() => {
     if (reservation.reservations.length > 0) {
       setAllReservations(reservation.reservations);
     }
-  },[fetchReservations]);
+  },[reservation]);
 
   return (
     <div>
