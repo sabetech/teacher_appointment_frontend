@@ -21,8 +21,8 @@ const ReservationForm = () => {
 
   useEffect(() => {
     if (createReservationStatus === "CreateReservationSuccess") {
-        dispatch(setIdle());  
-        setSnackOpen(true);
+      dispatch(setIdle());
+      setSnackOpen(true);
     }
   }, [createReservationStatus]);
 
@@ -39,6 +39,8 @@ const ReservationForm = () => {
         reservation_date: dateString,
       })
     );
+
+    navigate("/reservations");
   };
 
   const handleTeacherSelect = (text) => {
