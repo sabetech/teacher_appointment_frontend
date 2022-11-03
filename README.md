@@ -13,6 +13,8 @@ users interact with the application in a meaningful way.
 
 **To get started with to project and to get a local copy up and running follow these simple example steps run :**
 
+- Link to the backend [Backend](https://github.com/jheart-vic/appointment-app-back-end)
+
 - Clone Backend
 ```git clone https://github.com/jheart-vic/appointment-app-back-end```
 
