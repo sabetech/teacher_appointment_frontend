@@ -32,7 +32,6 @@ const Reservations = () => {
     navigate('/teachers');
     window.location.reload();
   };
-
   return (
     <>
       <div>
