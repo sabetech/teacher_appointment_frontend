@@ -15,7 +15,7 @@ export const signInUser = createAsyncThunk(
     } catch (e) {
       rejectWithValue('Exception:::'.e.getMessage());
     }
-  }
+  },
 );
 
 export const createUser = createAsyncThunk(
@@ -33,7 +33,7 @@ export const createUser = createAsyncThunk(
     } catch (e) {
       rejectWithValue(`Exception:::${e}`);
     }
-  }
+  },
 );
 
 export const logoutUser = createAsyncThunk(
@@ -53,7 +53,7 @@ export const logoutUser = createAsyncThunk(
     } catch (e) {
       rejectWithValue(`Exception:::${e}`);
     }
-  }
+  },
 );
 
 export const userSlice = createSlice({
