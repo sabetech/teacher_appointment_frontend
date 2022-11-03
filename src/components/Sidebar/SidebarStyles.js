@@ -90,7 +90,7 @@ export const ItemName = styled.span`
 
 // Sidebar Container
 export const SidebarContainer = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   width: ${({ displaySidebar }) => (displaySidebar ? '15rem' : '5rem')};
   height: 100vh;

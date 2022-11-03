@@ -7,6 +7,7 @@ import {
 } from '../../features/reservationsSlice';
 import { AuthContext } from '../../context/AuthContext';
 import './Reservation.css';
+import { Button } from '@mui/material';
 
 function Reservations() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function Reservations() {
             <th scope="col">Teacher's name</th>
             <th scope="col">When</th>
             <th scope="col">City</th>
-            <th scope="col">Cancel</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -53,16 +54,15 @@ function Reservations() {
               <td>{reservation.reservation_date}</td>
               <td>{reservation.city}</td>
               <td>
-                <button
-                  type="button"
-                  className="btn btn-danger"
+                <Button
+                  variant="contained"
                   onClick={() => {
                     handleDelete(reservation);
                   }}
                   style={{ backgroundColor: 'red' }}
                 >
-                  Cancel
-                </button>
+                  Cancel Reservation
+                </Button>
               </td>
             </tr>
           ))}

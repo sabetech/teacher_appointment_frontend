@@ -164,13 +164,16 @@ function TeacherDetail() {
                 alt={teacher.name}
                 style={{ height: '400px', width: '400px', objectFit: 'cover' }}
               />
-              <button
-                type="button"
-                className="bg-secondary p-1 px-4 rounded text-white my-3"
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: '#98BF10',
+                  marginTop: '10px',
+                }}
                 onClick={() => handleReserve()}
               >
-                book appointment
-              </button>
+                Book Appointment
+              </Button>
             </div>
 
             <div className="text-center mt-3">

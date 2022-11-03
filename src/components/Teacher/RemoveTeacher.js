@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { getTeacherList, deleteTeacher } from '../../features/teachersSlice';
 import { AuthContext } from '../../context/AuthContext';
 import Teacher from './Teacher';
-import './Teachers.css'
+import './Teachers.css';
 
 function RemoveTeacher() {
   const { user } = useContext(AuthContext);
@@ -22,7 +22,7 @@ function RemoveTeacher() {
   return (
     <>
       <h1 className="text-center">Remove Teachers</h1>
-      <div className="teachers" style={{marginTop: "30px"}}>
+      <div className="teachers" style={{ marginTop: '30px' }}>
         <div className="teacher-list">
           {(teachers
             && teachers.map((teacher) => (
@@ -43,7 +43,7 @@ function RemoveTeacher() {
                   onClick={() => handleDelete(teacher)}
                   style={{ marginTop: '10px', padding: '10px', fontSize: '1.2rem' }}
                   fullWidth
-                  
+
                 >
                   Delete
                 </Button>
