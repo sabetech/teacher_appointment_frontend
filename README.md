@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Appointment Teacher [FRONTEND]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> This is the frontend of the Appointment Teacher Project. It provides a user interface to enable
+users interact with the application in a meaningful way.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Built With
 
-### `npm start`
+- Languages: JavaScript, Ruby
+- Frameworks: Ruby On Rails, ReactJs
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**To get started with to project and to get a local copy up and running follow these simple example steps run :**
 
-### `npm test`
+- Clone Backend
+```git clone``` https://github.com/jheart-vic/appointment-app-back-end 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Clone Frontend
+```git clone``` https://github.com/sabetech/teacher_appointment_frontend
 
-### `npm run build`
+- Open two terminal windows and 
+```cd appointment-app-back-end``` in one of the terminals
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Open ```cd appointment_booking_frontend``` in the other terminal
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**To setup run :**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```npm install``` to install all the needed node modules
 
-### `npm run eject`
+**To start the frontend server run :**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```npm start```
+***
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+>>Notice that frontend server will be running on the ``port: 3000`` by default
+>>Remember: The backend server will start on ```port: 3001```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+👤 **Kiprotich Kimutai**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- GitHub: [@Kimutai01](https://github.com/Kimutai01/)
+- Twitter: [@kimutai_01](https://twitter.com/kimutai_01)
+- LinkedIn: [Kiprotich Kimutai](https://www.linkedin.com/in/kiprotich-kimutai/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+👤 **Albert Mensah-Ansah**
 
-### Code Splitting
+- Github: [@sabetech](https://github.com/sabetech)
+- Twitter [@al_kfx](https://twitter.com/al_kfx)
+- Linkedin [Albert Mensah-Ansah](linkedin.com/in/albert-mensah-ansah)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🤝 Contributing
 
-### Analyzing the Bundle Size
+Contributions, issues, and feature requests are welcome!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Feel free to check the [issues page](../../issues/).
 
-### Making a Progressive Web App
+## Show your support
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Give a ⭐️ if you like this project!
 
-### Advanced Configuration
+## Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Hat tip to anyone whose code was used
+- Inspiration
+- etc
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
