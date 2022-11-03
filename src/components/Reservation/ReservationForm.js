@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createReservation, setIdle } from "../../features/reservationsSlice";
 import { AuthContext } from "../../context/AuthContext";
 import "./ReservationForm.css";
-import { Snackbar, Alert } from "@mui/material";
+import { Snackbar, Alert, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const ReservationForm = () => {
@@ -16,15 +16,28 @@ const ReservationForm = () => {
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [city, setCity] = useState(null);
   const [snackOpen, setSnackOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
+
     if (createReservationStatus === "CreateReservationSuccess") {
+      navigate("/reservations");
       dispatch(setIdle());
       setSnackOpen(true);
     }
+
+    if (createReservationStatus === "ReservationFailed") {
+      setDialogOpen(true);
+      dispatch(setIdle());
+    }
+
   }, [createReservationStatus]);
+
+  const handleClose = () => {
+    setDialogOpen(false);
+  }
 
   const handleSubmit = () => {
     let token = user.authorization;
@@ -39,8 +52,6 @@ const ReservationForm = () => {
         reservation_date: dateString,
       })
     );
-
-    navigate("/reservations");
   };
 
   const handleTeacherSelect = (text) => {
@@ -128,6 +139,28 @@ const ReservationForm = () => {
           Reservation has been created Successfully
         </Alert>
       </Snackbar>
+
+      <Dialog
+        open={dialogOpen}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Reservation Failed!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Reservation for this Teacher already exists. Use another teacher!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          
+          <Button onClick={handleClose} autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

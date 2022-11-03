@@ -8,31 +8,27 @@ import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Reservations = () => {
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
   const reservation = useSelector((state) => state.reservations);
   const [allReservations, setAllReservations] = useState([]);
 
   useEffect(() => {
-    if (reservation.reservations.length == 0) {
       dispatch(fetchReservations(user.authorization));
-      return;
-    }
-  },[]);
+    
+  },[fetchReservations]);
 
   useEffect(() => {
     if (reservation.reservations.length > 0) {
       setAllReservations(reservation.reservations);
     }
-  }, [fetchReservations]);
+  }, [reservation]);
 
   const handleDelete = (reservation) => {
-    console.log(reservation.id);
+  
     const token = user.authorization;
     dispatch(deleteReservation({ token, reservationId: reservation.id }));
-    navigate("/teachers");
-    window.location.reload();
   };
 
   return (

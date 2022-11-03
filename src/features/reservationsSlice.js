@@ -29,8 +29,7 @@ export const createReservation = createAsyncThunk(
       });
       return response;
     } catch (e) {
-      console.log("Exception:::", e);
-      rejectWithValue(e.message);
+      rejectWithValue(e.message());
     }
   }
 );
@@ -38,10 +37,10 @@ export const createReservation = createAsyncThunk(
 export const deleteReservation = createAsyncThunk(
   "reservations/deleteReservation",
   async ({ token, reservationId }, { rejectWithValue }) => {
-    console.log("id:::", reservationId);
+    
     try {
       const response = await removeReservation({ token, reservationId });
-      return response;
+      return {data: response, removedId: reservationId};
     } catch (e) {
       rejectWithValue(e.message);
     }
@@ -61,6 +60,9 @@ const reservationsSlice = createSlice({
     setIdle: (state) => {
       state.status = "idle";
     },
+    clearStore: (state) => {
+      state.reservations = [];
+    }
   },
   extraReducers(builder) {
     builder
@@ -81,16 +83,16 @@ const reservationsSlice = createSlice({
         state.status = "CreateReservationSuccess";
       })
       .addCase(createReservation.rejected, (state, action) => {
-        console.log("FAILED HERE");
-        state.status = "Failed";
-        state.message = action.payload;
-        console.log("ERRIOR MESSAGE::", action.payload);
+        state.status = "ReservationFailed";
+        state.message = "You already have a reservation for this teacher!";
+        console.log(action.payload);
       })
       .addCase(deleteReservation.pending, (state) => {
         state.status = "Loading";
       })
       .addCase(deleteReservation.fulfilled, (state, action) => {
         console.log("Success::", action.payload);
+        state.reservations = state.reservations.filter(reserve => reserve.id !== action.payload.removedId);
         state.status = "DeleteReservationSuccess";
       })
       .addCase(deleteReservation.rejected, (state, action) => {
@@ -102,5 +104,5 @@ const reservationsSlice = createSlice({
   },
 });
 
-export const { setIdle } = reservationsSlice.actions;
+export const { setIdle, clearStore } = reservationsSlice.actions;
 export default reservationsSlice.reducer;

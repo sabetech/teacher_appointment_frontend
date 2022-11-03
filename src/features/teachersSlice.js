@@ -1,4 +1,3 @@
-import { redirect } from "react-router-dom";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { teachers, createTeacher, getTeacher, removeTeacher } from "../services/api";
 

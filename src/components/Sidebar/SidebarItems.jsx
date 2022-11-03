@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   ItemsList,
   ItemContainer,
@@ -11,6 +11,27 @@ import { SideBarMenuItems } from "..";
 
 const SidebarItems = ({ displaySidebar }) => {
   const [activeItem, setActiveItem] = useState(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    switch(location.pathname) {
+      case "/":
+        setActiveItem(1)
+        break;
+      case "/reservations":
+        setActiveItem(2)
+        break;
+      case "/reserve":
+        setActiveItem(3);
+        break;
+      case "/addteacher":
+        setActiveItem(4);
+        break;
+      case "remove-teacher":
+        setActiveItem(5);
+        break;
+    }
+  });
 
   return (
     <ItemsList>

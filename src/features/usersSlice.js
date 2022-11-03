@@ -105,8 +105,8 @@ export const userSlice = createSlice({
     })
     .addCase(logoutUser.fulfilled, (state, action) => {
       state.status = "Ready";
-      console.log("SUCCESS::", action.payload);
       state.user = null;
+
     })
     .addCase(logoutUser.rejected, (state, action) => {
       //an error occurred. get error action payload

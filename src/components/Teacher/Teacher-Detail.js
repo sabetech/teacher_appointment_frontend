@@ -44,11 +44,18 @@ const TeacherDetail = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (createReservationStatus === "Success") {
+    if (createReservationStatus === "CreateReservationSuccess") {
         dispatch(setIdle());
         setSnackOpen(true);
         navigate("/reservations");
     }
+
+    if (createReservationStatus === "ReservationFailed") {
+      alert("This teacher has already been reserved. Choose another!");
+      dispatch(setIdle());
+    }
+
+
   }, [createReservationStatus]);
 
   useEffect(() => {
@@ -138,11 +145,11 @@ const TeacherDetail = () => {
       <div className="container d-flex justify-content-between">
         {(teacher && (
           <>
-            <div class="d-flex flex-column">
+            <div className="d-flex flex-column">
               <img
                 src={teacher?.photo}
                 width="100"
-                class="rounded-circle"
+                className="rounded-circle"
                 alt={teacher.name}
                 style={{ height: "400px", width: "400px", objectFit: "cover" }}
               />
@@ -154,19 +161,19 @@ const TeacherDetail = () => {
               </button>
             </div>
 
-            <div class="text-center mt-3">
+            <div className="text-center mt-3">
               <h3>Profile</h3>
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-dark">
+              <ul className="list-group">
+                <li className="list-group-item list-group-item-dark">
                   Name: {teacher.name}
                 </li>
-                <li class="list-group-item list-group-item-light">
+                <li className="list-group-item list-group-item-light">
                   Title: {teacher.title}
                 </li>
-                <li class="list-group-item list-group-item-dark">
+                <li className="list-group-item list-group-item-dark">
                   Work experience: {teacher.work_experience}
                 </li>
-                <li class="list-group-item list-group-item-light">
+                <li className="list-group-item list-group-item-light">
                   Bio {teacher.bio}
                 </li>
               </ul>

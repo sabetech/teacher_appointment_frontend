@@ -36,12 +36,11 @@ const AddTeacher = () => {
   };
 
   const handlePhoto = (e) => {
-    console.log(e.target.files[0]);
     setPhoto(e.target.files[0]);
   };
 
   useEffect(() => {
-    console.log(teacherSaveStatus);
+    
     if (teacherSaveStatus === "newTeacherSuccess") {
       navigate("/teachers");
       setSnackOpen(true);
