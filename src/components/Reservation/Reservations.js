@@ -8,30 +8,26 @@ import {
 import { AuthContext } from '../../context/AuthContext';
 
 const Reservations = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
   const reservation = useSelector((state) => state.reservations);
   const [allReservations, setAllReservations] = useState([]);
 
   useEffect(() => {
-    if (reservation.reservations.length == 0) {
-      dispatch(fetchReservations(user.authorization));
-    }
-  }, [reservation]);
+    dispatch(fetchReservations(user.authorization));
+  }, [fetchReservations]);
 
   useEffect(() => {
     if (reservation.reservations.length > 0) {
       setAllReservations(reservation.reservations);
     }
-  }, [fetchReservations]);
+  }, [reservation]);
 
   const handleDelete = (reservation) => {
     const token = user.authorization;
     dispatch(deleteReservation({ token, reservationId: reservation.id }));
-    navigate('/teachers');
-    window.location.reload();
   };
+
   return (
     <>
       <div>

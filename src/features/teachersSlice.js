@@ -1,47 +1,61 @@
-import { redirect } from 'react-router-dom';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
-  teachers, createTeacher, getTeacher, removeTeacher,
+  teachers,
+  createTeacher,
+  getTeacher,
+  removeTeacher,
 } from '../services/api';
 
-export const fetchteachers = createAsyncThunk('teachers/getTeachers', async (token, { rejectWithValue }) => {
-  try {
-    const response = await teachers({ token });
+export const fetchteachers = createAsyncThunk(
+  'teachers/getTeachers',
+  async (token, { rejectWithValue }) => {
+    try {
+      const response = await teachers({ token });
 
-    return response;
-  } catch (e) {
-    rejectWithValue('Exception:::', e.getMessage());
+      return response;
+    } catch (e) {
+      rejectWithValue('Exception:::', e.getMessage());
+    }
   }
-});
+);
 
-export const newTeacher = createAsyncThunk('teachers/createTeacher', async ({ token, teacher }, { rejectWithValue }) => {
-  try {
-    const response = await createTeacher({ token, teacher });
-    return response;
-  } catch (e) {
-    rejectWithValue(`Exception:::${e}`);
+export const newTeacher = createAsyncThunk(
+  'teachers/createTeacher',
+  async ({ token, teacher }, { rejectWithValue }) => {
+    try {
+      const response = await createTeacher({ token, teacher });
+      return response;
+    } catch (e) {
+      rejectWithValue(`Exception:::${e}`);
+    }
   }
-});
+);
 
-export const singleTeacher = createAsyncThunk('teachers/getTeacher', async ({ token, teacher_id }, { rejectWithValue }) => {
-  try {
-    const response = await getTeacher({ token, teacher_id });
+export const singleTeacher = createAsyncThunk(
+  'teachers/getTeacher',
+  async ({ token, teacher_id }, { rejectWithValue }) => {
+    try {
+      const response = await getTeacher({ token, teacher_id });
 
-    return response;
-  } catch (e) {
-    rejectWithValue(`Exception:::${e}`);
+      return response;
+    } catch (e) {
+      rejectWithValue(`Exception:::${e}`);
+    }
   }
-});
+);
 
-export const deleteTeacher = createAsyncThunk('teachers/deleteTeacher', async ({ token, teacherId }, { rejectWithValue }) => {
-  try {
-    const response = await removeTeacher({ token, teacherId });
+export const deleteTeacher = createAsyncThunk(
+  'teachers/deleteTeacher',
+  async ({ token, teacherId }, { rejectWithValue }) => {
+    try {
+      const response = await removeTeacher({ token, teacherId });
 
-    return { data: response, removedId: teacherId };
-  } catch (e) {
-    rejectWithValue(`Exception:::${e}`);
+      return { data: response, removedId: teacherId };
+    } catch (e) {
+      rejectWithValue(`Exception:::${e}`);
+    }
   }
-});
+);
 
 export const teacherSlice = createSlice({
   name: 'teacher',
@@ -68,7 +82,7 @@ export const teacherSlice = createSlice({
         state.teachers = action.payload;
       })
       .addCase(fetchteachers.rejected, (state, action) => {
-      // an error occurred. get error action payload
+        // an error occurred. get error action payload
       })
       .addCase(newTeacher.pending, (state) => {
         state.status = 'Loading';
@@ -77,7 +91,7 @@ export const teacherSlice = createSlice({
         state.status = 'newTeacherSuccess';
       })
       .addCase(newTeacher.rejected, (state, action) => {
-      // an error occurred. get error action payload
+        // an error occurred. get error action payload
         state.status = 'newTeacherFailed';
       })
       .addCase(singleTeacher.pending, (state) => {
@@ -95,7 +109,9 @@ export const teacherSlice = createSlice({
       })
       .addCase(deleteTeacher.fulfilled, (state, action) => {
         state.status = 'DeleteSuccess';
-        state.teachers = state.teachers.filter((teacher) => teacher.id !== action.payload.removedId);
+        state.teachers = state.teachers.filter(
+          (teacher) => teacher.id !== action.payload.removedId
+        );
       })
       .addCase(deleteTeacher.rejected, (state, action) => {
         state.status = 'DeleteFailed';

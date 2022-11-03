@@ -3,28 +3,48 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createReservation, setIdle } from '../../features/reservationsSlice';
 import { AuthContext } from '../../context/AuthContext';
 import './ReservationForm.css';
-import { Snackbar, Alert } from '@mui/material';
+import {
+  Snackbar,
+  Alert,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  Button,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const ReservationForm = () => {
   const teachers = useSelector((state) => state.teacher.teachers);
   const dispatch = useDispatch();
   const createReservationStatus = useSelector(
-    (state) => state.reservations.status,
+    (state) => state.reservations.status
   );
   const [reservation_date, setReservationDate] = useState(null);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
   const [city, setCity] = useState(null);
   const [snackOpen, setSnackOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (createReservationStatus === 'CreateReservationSuccess') {
+      navigate('/reservations');
       dispatch(setIdle());
       setSnackOpen(true);
     }
+
+    if (createReservationStatus === 'ReservationFailed') {
+      setDialogOpen(true);
+      dispatch(setIdle());
+    }
   }, [createReservationStatus]);
+
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
 
   const handleSubmit = () => {
     const token = user.authorization;
@@ -37,10 +57,8 @@ const ReservationForm = () => {
         teacher: selectedTeacher || teachers[0],
         city,
         reservation_date: dateString,
-      }),
+      })
     );
-
-    navigate('/reservations');
   };
 
   const handleTeacherSelect = (text) => {
@@ -67,8 +85,8 @@ const ReservationForm = () => {
                   <label>Select Teacher</label>
                   <br />
                   <select onChange={(e) => handleTeacherSelect(e.target.value)}>
-                    {teachers
-                      && teachers.map((teacher) => (
+                    {teachers &&
+                      teachers.map((teacher) => (
                         <option key={teacher.id} value={teacher.id}>
                           {teacher.name}
                         </option>
@@ -128,6 +146,27 @@ const ReservationForm = () => {
           Reservation has been created Successfully
         </Alert>
       </Snackbar>
+
+      <Dialog
+        open={dialogOpen}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {'Reservation Failed!'}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Reservation for this Teacher already exists. Use another teacher!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

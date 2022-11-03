@@ -212,7 +212,7 @@ export const makeReservation = async ({
 
     return res.json();
   } catch (e) {
-    throw new Error(e.message);
+    throw new Error(e.message());
   }
 };
 

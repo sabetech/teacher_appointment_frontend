@@ -14,14 +14,12 @@ export const fetchReservations = createAsyncThunk(
     } catch (e) {
       rejectWithValue(e.message);
     }
-  },
+  }
 );
 
 export const createReservation = createAsyncThunk(
   'reservations/makeReservation',
-  async ({
-    token, teacher, city, reservation_date,
-  }, { rejectWithValue }) => {
+  async ({ token, teacher, city, reservation_date }, { rejectWithValue }) => {
     try {
       const response = await makeReservation({
         token,
@@ -31,9 +29,9 @@ export const createReservation = createAsyncThunk(
       });
       return response;
     } catch (e) {
-      rejectWithValue(e.message);
+      rejectWithValue(e.message());
     }
-  },
+  }
 );
 
 export const deleteReservation = createAsyncThunk(
@@ -41,11 +39,11 @@ export const deleteReservation = createAsyncThunk(
   async ({ token, reservationId }, { rejectWithValue }) => {
     try {
       const response = await removeReservation({ token, reservationId });
-      return response;
+      return { data: response, removedId: reservationId };
     } catch (e) {
       rejectWithValue(e.message);
     }
-  },
+  }
 );
 
 const initialState = {
@@ -60,6 +58,9 @@ const reservationsSlice = createSlice({
   reducers: {
     setIdle: (state) => {
       state.status = 'idle';
+    },
+    clearStore: (state) => {
+      state.reservations = [];
     },
   },
   extraReducers(builder) {
@@ -78,13 +79,18 @@ const reservationsSlice = createSlice({
         state.status = 'CreateReservationSuccess';
       })
       .addCase(createReservation.rejected, (state, action) => {
-        state.status = 'Failed';
-        state.message = action.payload;
+        state.status = 'ReservationFailed';
+        state.message = 'You already have a reservation for this teacher!';
+        console.log(action.payload);
       })
       .addCase(deleteReservation.pending, (state) => {
         state.status = 'Loading';
       })
       .addCase(deleteReservation.fulfilled, (state, action) => {
+        console.log('Success::', action.payload);
+        state.reservations = state.reservations.filter(
+          (reserve) => reserve.id !== action.payload.removedId
+        );
         state.status = 'DeleteReservationSuccess';
       })
       .addCase(deleteReservation.rejected, (state, action) => {
@@ -94,5 +100,5 @@ const reservationsSlice = createSlice({
   },
 });
 
-export const { setIdle } = reservationsSlice.actions;
+export const { setIdle, clearStore } = reservationsSlice.actions;
 export default reservationsSlice.reducer;

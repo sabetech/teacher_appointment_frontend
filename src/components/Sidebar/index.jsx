@@ -13,7 +13,7 @@ import {
 import { Button } from '@mui/material';
 import { AuthContext } from '../../context/AuthContext';
 import { logoutUser } from '../../features/usersSlice';
-// import BrandLogo from "./BrandLogo.svg";
+import { clearStore } from '../../features/reservationsSlice';
 
 import { SidebarItems } from '..';
 import { useDispatch } from 'react-redux';
@@ -36,6 +36,7 @@ export default function Sidebar({ children }) {
 
   const logout = () => {
     dispatch(logoutUser(user.authorization));
+    dispatch(clearStore());
     localStorage.clear();
     setUser(null);
   };
