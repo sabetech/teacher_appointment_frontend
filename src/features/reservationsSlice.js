@@ -12,7 +12,7 @@ export const fetchReservations = createAsyncThunk(
       const response = await getReservations({ token });
       return response;
     } catch (e) {
-      rejectWithValue(e.message);
+      return rejectWithValue(e.message);
     }
   },
 );
@@ -71,8 +71,8 @@ const reservationsSlice = createSlice({
         state.reservations = action.payload;
       })
       .addCase(fetchReservations.rejected, (state, action) => {
-        state.status = 'FetchReservationFailed';
-        state.message = action.payload;
+        console.log(action.payload);
+        state.status = action.payload;
       })
       .addCase(createReservation.pending, (state) => {
         state.status = 'Loading';

@@ -75,7 +75,7 @@ export const teachers = async ({ token }) => {
       },
     });
     if (res.status === 401) {
-      return false;
+      throw new Error('Unauthorized');
     }
     return res.json();
   } catch (e) {
@@ -106,7 +106,7 @@ export const createTeacher = async ({ token, teacher }) => {
       }),
     });
     if (res.status === 401) {
-      return false;
+      throw new Error('Unauthorized');
     }
     return res.json();
   } catch (e) {
@@ -176,7 +176,7 @@ export const getReservations = async ({ token }) => {
       },
     });
     if (res.status === 401) {
-      return false;
+      throw new Error('Unauthorized');
     }
     return res.json();
   } catch (e) {

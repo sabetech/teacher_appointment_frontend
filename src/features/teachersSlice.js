@@ -11,10 +11,9 @@ export const fetchteachers = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const response = await teachers({ token });
-
       return response;
-    } catch (e) {
-      rejectWithValue('Exception:::', e.getMessage());
+    } catch (err) {
+      return rejectWithValue(err.message);
     }
   },
 );
@@ -39,7 +38,7 @@ export const singleTeacher = createAsyncThunk(
 
       return response;
     } catch (e) {
-      rejectWithValue(`Exception:::${e}`);
+      rejectWithValue(e.message());
     }
   },
 );
@@ -66,10 +65,13 @@ export const teacherSlice = createSlice({
   },
   reducers: {
     setIdle: (state) => {
-      state.status = 'Ready';
+      state.status = 'idle';
     },
     setAppNotReady: (state) => {
       state.status = 'Not Ready';
+    },
+    clearStore: (state) => {
+      state.teachers = [];
     },
   },
   extraReducers(builder) {
@@ -78,11 +80,12 @@ export const teacherSlice = createSlice({
         state.status = 'Loading';
       })
       .addCase(fetchteachers.fulfilled, (state, action) => {
-        state.status = 'Ready';
+        state.status = 'TeacherSuccess';
         state.teachers = action.payload;
       })
       .addCase(fetchteachers.rejected, (state, action) => {
         // an error occurred. get error action payload
+        state.status = action.payload;
       })
       .addCase(newTeacher.pending, (state) => {
         state.status = 'Loading';
@@ -123,4 +126,5 @@ export const getTeacherList = (state) => state?.teacher?.teachers;
 export const getStatus = (state) => state?.teacher?.status;
 export const getError = (state) => state?.teacher?.error;
 
+export const { setIdle, clearStore } = teacherSlice.actions;
 export default teacherSlice.reducer;

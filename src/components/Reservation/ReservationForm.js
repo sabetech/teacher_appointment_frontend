@@ -6,13 +6,23 @@ import './ReservationForm.css';
 import {
   Snackbar,
   Alert,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Dialog,
   DialogContent,
   DialogActions,
   Button,
   DialogContentText,
   DialogTitle,
+  Select,
+  Paper,
+  TextField,
 } from '@mui/material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+
 import { useNavigate } from 'react-router-dom';
 
 function ReservationForm() {
@@ -74,65 +84,70 @@ function ReservationForm() {
   };
 
   return (
-    <>
-      <div className="container mt-5 mb-5 d-flex justify-content-center">
-        <div className="card px-1 py-4 w-50">
-          <div className="card-body">
-            <h6 className="information mt-4">Reservation Form</h6>
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="form-group">
-                  <label>Select Teacher</label>
-                  <br />
-                  <select onChange={(e) => handleTeacherSelect(e.target.value)}>
-                    {teachers
-                      && teachers.map((teacher) => (
-                        <option key={teacher.id} value={teacher.id}>
-                          {teacher.name}
-                        </option>
-                      ))}
-                  </select>
-                  <br />
-                  <label>City</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="city"
-                    placeholder="Enter City"
-                    onChange={(e) => setCity(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
 
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="form-group">
-                  <label>Date</label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    id="date"
-                    placeholder="Enter date"
-                    onChange={(e) => setReservationDate(e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className=" d-flex justify-content-center">
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={handleSubmit}
-                style={{ backgroundColor: 'blue' }}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="App">
+      <Paper
+        sx={{
+          bgcolor: 'background.paper',
+          boxShadow: 1,
+          borderRadius: 2,
+          minWidth: 300,
+          minHeight: 300,
+          marginLeft: 3,
+          marginRight: 3,
+          marginTop: '20%',
+          paddingTop: 5,
+          paddingBottom: 5,
+        }}
+      >
+        <h2>Add Reservation</h2>
+        <form className="form">
+          <FormControl fullWidth sx={{ marginTop: '17px' }}>
+            <InputLabel id="demo-simple-select-label">Select Teacher</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={selectedTeacher?.id || ''}
+              label="Select Teeacher"
+              onChange={(e) => handleTeacherSelect(e.target.value)}
+            >
+              {teachers
+                && teachers.map((teacher) => (
+                  <MenuItem key={teacher.id} value={teacher.id}>{teacher.name}</MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth sx={{ marginTop: '17px' }}>
+            <TextField
+              id="city"
+              label="City"
+              variant="outlined"
+              sx={{ marginBottom: 2 }}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </FormControl>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <MobileDatePicker
+              label="Date mobile"
+              inputFormat="YYYY-MM-DD"
+              value={reservation_date}
+              onChange={(val) => setReservationDate(val)}
+              renderInput={(params) => <TextField {...params} />}
+              fullWidth
+            />
+          </LocalizationProvider>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            sx={{
+              backgroundColor: '#98BF10',
+              marginTop: '10px',
+            }}
+          >
+            Submit
+          </Button>
+        </form>
+      </Paper>
       <Snackbar
         open={snackOpen}
         autoHideDuration={6000}
@@ -167,7 +182,7 @@ function ReservationForm() {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 }
 

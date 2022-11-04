@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeacherList, fetchteachers } from '../../features/teachersSlice';
+import { getTeacherList, fetchteachers, setIdle } from '../../features/teachersSlice';
 import { AuthContext } from '../../context/AuthContext';
 import Teacher from './Teacher';
 import './Teachers.css';
@@ -8,7 +8,16 @@ import './Teachers.css';
 function Teachers() {
   const dispatch = useDispatch();
   const teachers = useSelector(getTeacherList);
-  const { user } = useContext(AuthContext);
+  const status = useSelector((state) => state.teacher.status);
+  const { user, setUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (status === 'Unauthorized') {
+      dispatch(setIdle());
+      localStorage.clear();
+      setUser(null);
+    }
+  }, [status]);
 
   useEffect(() => {
     dispatch(fetchteachers(user?.authorization));

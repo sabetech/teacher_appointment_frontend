@@ -48,10 +48,10 @@ export const logoutUser = createAsyncThunk(
         };
       }
       if (response.status.code === 401) {
-        return true;
+        throw new Error('Unauthorized');
       }
     } catch (e) {
-      rejectWithValue(`Exception:::${e}`);
+      return rejectWithValue(e.message);
     }
   },
 );

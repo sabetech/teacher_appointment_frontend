@@ -1,9 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import {
   fetchReservations,
-  deleteReservation,
+  deleteReservation, setIdle,
 } from '../../features/reservationsSlice';
 import { AuthContext } from '../../context/AuthContext';
 import './Reservation.css';
@@ -11,9 +10,18 @@ import { Button } from '@mui/material';
 
 function Reservations() {
   const dispatch = useDispatch();
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const reservation = useSelector((state) => state.reservations);
   const [allReservations, setAllReservations] = useState([]);
+  const status = useSelector((state) => state.reservations.status);
+
+  useEffect(() => {
+    if (status === 'Unauthorized') {
+      localStorage.clear();
+      setUser(null);
+      dispatch(setIdle());
+    }
+  }, [status]);
 
   useEffect(() => {
     dispatch(fetchReservations(user.authorization));

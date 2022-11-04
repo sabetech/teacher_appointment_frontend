@@ -1,6 +1,4 @@
-// src/components/Sidebar/index.jsx
-import React, { useContext, useState } from 'react';
-
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Children,
   SidebarContainer,
@@ -17,13 +15,19 @@ import { clearStore } from '../../features/reservationsSlice';
 
 import { SidebarItems } from '..';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const MOBILE_VIEW = window.innerWidth < 468;
 
 export default function Sidebar({ children }) {
   const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
   const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    navigate('/');
+  }, [user]);
 
   const handleSidebarDisplay = (e) => {
     e.preventDefault();
@@ -35,10 +39,10 @@ export default function Sidebar({ children }) {
   };
 
   const logout = () => {
-    dispatch(logoutUser(user?.authorization));
     dispatch(clearStore());
     localStorage.clear();
     setUser(null);
+    dispatch(logoutUser(user?.authorization));
   };
 
   return (

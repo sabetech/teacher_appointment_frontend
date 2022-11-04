@@ -43,7 +43,6 @@ function RemoveTeacher() {
                   onClick={() => handleDelete(teacher)}
                   style={{ marginTop: '10px', padding: '10px', fontSize: '1.2rem' }}
                   fullWidth
-
                 >
                   Delete
                 </Button>
