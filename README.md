@@ -13,6 +13,10 @@ users interact with the application in a meaningful way.
 
 **To get started with to project and to get a local copy up and running follow these simple example steps run :**
 
+screenshots
+![Desktop Screenshot](./src/assets/Screenshot%202022-11-04%20at%203.05.37%20AM.png)
+![Mobile Screenshot](./src/assets/Screenshot%202022-11-04%20at%203.05.50%20AM.png)
+
 - Link to the backend [Backend](https://github.com/jheart-vic/appointment-app-back-end)
 
 - Clone Backend
