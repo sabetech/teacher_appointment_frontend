@@ -9,7 +9,8 @@ import {
 
 import { SideBarMenuItems } from '..';
 
-const SidebarItems = ({ displaySidebar }) => {
+// [2, { "namedComponents": "arrow-function" }]
+const SidebarItems = function ({ displaySidebar }) {
   const [activeItem, setActiveItem] = useState(0);
   const location = useLocation();
 
