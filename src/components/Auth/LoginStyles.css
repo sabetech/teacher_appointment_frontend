@@ -1,0 +1,17 @@
+.App {
+  display: flex;
+  font-family: sans-serif;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.form {
+  width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  background: white;
+  padding: 50px;
+}

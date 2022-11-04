@@ -1,6 +1,4 @@
-// src/components/Sidebar/index.jsx
-import React, { useState } from "react";
-
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Children,
   SidebarContainer,
@@ -9,15 +7,27 @@ import {
   SidebarLogo,
   SidebarBrand,
   SidebarToggler,
-} from "./SidebarStyles";
-// import BrandLogo from "./BrandLogo.svg";
+} from './SidebarStyles';
+import { Button } from '@mui/material';
+import { AuthContext } from '../../context/AuthContext';
+import { logoutUser } from '../../features/usersSlice';
+import { clearStore } from '../../features/reservationsSlice';
 
-import { SidebarItems } from "..";
+import { SidebarItems } from '..';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const MOBILE_VIEW = window.innerWidth < 468;
 
 export default function Sidebar({ children }) {
   const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
+  const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    navigate('/');
+  }, [user]);
 
   const handleSidebarDisplay = (e) => {
     e.preventDefault();
@@ -28,13 +38,20 @@ export default function Sidebar({ children }) {
     }
   };
 
+  const logout = () => {
+    dispatch(clearStore());
+    localStorage.clear();
+    setUser(null);
+    dispatch(logoutUser(user?.authorization));
+  };
+
   return (
-    <React.Fragment>
+    <>
       <SidebarContainer displaySidebar={displaySidebar}>
         <SidebarWrapper>
           <SidebarLogoWrapper displaySidebar={displaySidebar}>
             {/* Logo wrapper starts */}
-            <SidebarLogo href="#">
+            <SidebarLogo href="#" style={{ textDecoration: 'none' }}>
               <span className="app-brand-logo demo">
                 {/* <img src={BrandLogo} alt="Brand logo" /> */}
               </span>
@@ -42,26 +59,34 @@ export default function Sidebar({ children }) {
                 displaySidebar={displaySidebar}
                 className="app__brand__text"
               >
-                Appoint <br />Teacher
+                Appoint
+                <br />
+                Teacher
               </SidebarBrand>
             </SidebarLogo>
             {/* Logo wrapper ends */}
             {/* Toggle button */}
-            {/* <SidebarToggler
+            <SidebarToggler
               displaySidebar={displaySidebar}
               onClick={handleSidebarDisplay}
-            >
-              <div className="outer__circle">
-                <div className="inner__circle" />
-              </div>
-            </SidebarToggler> */}
+            />
           </SidebarLogoWrapper>
-            {/* Render the SidebarItems component */}
+          {/* Render the SidebarItems component */}
           <SidebarItems displaySidebar={displaySidebar} />
         </SidebarWrapper>
       </SidebarContainer>
-            {/* Render the children */}
+      {/* Render the children */}
       <Children displaySidebar={displaySidebar}>{children}</Children>
-    </React.Fragment>
+
+      <div>
+        <Button
+          variant="outlined"
+          onClick={() => logout()}
+          className="my-2 mx-2"
+        >
+          Logout
+        </Button>
+      </div>
+    </>
   );
 }
