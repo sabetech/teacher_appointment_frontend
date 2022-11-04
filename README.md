@@ -19,6 +19,10 @@ screenshots
 
 - Link to the backend [Backend](https://github.com/jheart-vic/appointment-app-back-end)
 
+- Link to the kanban board [Backend](https://github.com/users/jheart-vic/projects/5#card-86309122 )
+
+
+
 - Clone Backend
 ```git clone https://github.com/jheart-vic/appointment-app-back-end```
 
