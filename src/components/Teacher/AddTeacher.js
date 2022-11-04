@@ -82,23 +82,18 @@ function AddTeacher() {
       >
         <h2>Add Teacher</h2>
         <form className="form">
-          <Button
-            variant="outlined"
-            component="label"
-            sx={{ marginBottom: 2 }}
-          >
-            Upload
-            <input
-              hidden
-              accept="image/*"
-              type="file"
-              onChange={handlePhoto}
-            />
-            {' '}
-            Image
-            {' '}
-            {teacherphoto?.name}
-          </Button>
+
+          Upload
+          <input
+            accept="image/*"
+            type="file"
+            onChange={handlePhoto}
+          />
+          {' '}
+          Image
+          {' '}
+          {teacherphoto?.name}
+
           <TextField
             id="name"
             label="Name"

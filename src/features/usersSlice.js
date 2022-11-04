@@ -99,7 +99,7 @@ export const userSlice = createSlice({
         state.status = 'Loading';
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
-        state.status = 'Ready';
+        state.status = 'logoutSuccess';
         state.user = null;
       })
       .addCase(logoutUser.rejected, (state, action) => {

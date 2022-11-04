@@ -8,8 +8,8 @@ import { DynamicItem, Sidebar, SideBarMenuItems } from './components';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import TeacherDetail from './components/Teacher/Teacher-Detail';
+import { logoutUser } from './features/usersSlice';
 import {
-  AppBar,
   CssBaseline,
   Box,
   Drawer,
@@ -22,6 +22,8 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearStore, setIdle } from './features/reservationsSlice';
 
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -34,11 +36,22 @@ function App(props) {
   const userVal = useMemo(() => ({ user, setUser }), [user, setUser]);
   const location = useLocation();
   const path = location.pathname;
+  const dispatch = useDispatch();
+  const logoutstatus = useSelector((state) => state.user.status);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  console.log('Path: ', path);
+
+  useEffect(() => {
+    if (logoutstatus === 'logoutSuccess') {
+      localStorage.removeItem('user');
+      dispatch(clearStore());
+      dispatch(setIdle());
+      setUser(null);
+    }
+  }, [logoutstatus]);
+
   const drawer = (
     <div>
       <Toolbar />
@@ -64,6 +77,17 @@ function App(props) {
             </Link>
           </ListItem>
         ))}
+        <Divider />
+        <ListItem>
+          <ListItemButton
+            sx={{ backgroundColor: 'red', color: 'white', borderRadius: 3 }}
+            onClick={() => {
+              dispatch(logoutUser(user?.authorization));
+            }}
+          >
+            <ListItemText primary={<Typography sx={{ fontSize: 20, fontWeight: 700 }}>Logout</Typography>} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </div>
   );
@@ -180,6 +204,7 @@ function App(props) {
               </Routes>
             </div>
           </Box>
+
         </Box>
 
       )}
