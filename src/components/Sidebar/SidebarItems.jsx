@@ -14,21 +14,24 @@ const SidebarItems = ({ displaySidebar }) => {
   const location = useLocation();
 
   useEffect(() => {
-    switch(location.pathname) {
-      case "/":
-        setActiveItem(1)
+    switch (location.pathname) {
+      case '/':
+        setActiveItem(1);
         break;
-      case "/reservations":
-        setActiveItem(2)
+      case '/reservations':
+        setActiveItem(2);
         break;
-      case "/reserve":
+      case '/reserve':
         setActiveItem(3);
         break;
-      case "/addteacher":
+      case '/addteacher':
         setActiveItem(4);
         break;
-      case "remove-teacher":
+      case 'remove-teacher':
         setActiveItem(5);
+        break;
+      default:
+        setActiveItem(1);
         break;
     }
   });
@@ -39,12 +42,15 @@ const SidebarItems = ({ displaySidebar }) => {
         <ItemContainer
           key={index}
           onClick={() => setActiveItem(itemData.id)}
-          className={itemData.id === activeItem ? "active" : ""}
+          className={itemData.id === activeItem ? 'active' : ''}
         >
-          <Link to={itemData.path} style={{ textDecoration: "none" }}>
+          <Link to={itemData.path} style={{ textDecoration: 'none' }}>
             <ItemWrapper>
               {itemData.icon}
-              <ItemName displaySidebar={displaySidebar} className={itemData.id === activeItem ? "active" : ""}>
+              <ItemName
+                displaySidebar={displaySidebar}
+                className={itemData.id === activeItem ? 'active' : ''}
+              >
                 {itemData.name}
               </ItemName>
             </ItemWrapper>

@@ -71,7 +71,6 @@ const reservationsSlice = createSlice({
         state.reservations = action.payload;
       })
       .addCase(fetchReservations.rejected, (state, action) => {
-        console.log(action.payload);
         state.status = action.payload;
       })
       .addCase(createReservation.pending, (state) => {
