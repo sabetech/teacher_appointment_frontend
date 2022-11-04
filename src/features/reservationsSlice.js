@@ -94,7 +94,7 @@ const reservationsSlice = createSlice({
         state.status = 'DeleteReservationSuccess';
       })
       .addCase(deleteReservation.rejected, (state, action) => {
-        state.status = 'Failed';
+        state.status = 'DeleteReservationFailed';
         state.message = action.payload;
       });
   },

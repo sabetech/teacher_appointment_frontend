@@ -28,9 +28,7 @@ function Reservations() {
   }, [fetchReservations]);
 
   useEffect(() => {
-    if (reservation.reservations.length > 0) {
-      setAllReservations(reservation.reservations);
-    }
+    setAllReservations(reservation?.reservations);
   }, [reservation]);
 
   const handleDelete = (reservation) => {
