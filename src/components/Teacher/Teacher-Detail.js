@@ -51,7 +51,7 @@ function TeacherDetail() {
     }
 
     if (createReservationStatus === 'ReservationFailed') {
-      alert('This teacher has already been reserved. Choose another!');
+      alert('This teacher has already been reserved. Choose another!'); // eslint-disable-line no-alert
       dispatch(setIdle());
     }
   }, [createReservationStatus]);
