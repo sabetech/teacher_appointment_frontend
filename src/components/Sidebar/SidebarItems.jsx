@@ -9,7 +9,7 @@ import {
 
 import { SideBarMenuItems } from '..';
 
-const SidebarItems = ({ displaySidebar }) => {
+const SidebarItems = function ({ displaySidebar }) { // eslint-disable-line func-names
   const [activeItem, setActiveItem] = useState(0);
   const location = useLocation();
 
