@@ -27,7 +27,7 @@ export const createUser = createAsyncThunk(
       if (response.data.status.code === 200) {
         return {
           data: response.data.status.data,
-          authorization: response.header,
+          authorization: response.header, 
         };
       }
     } catch (e) {
