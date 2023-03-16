@@ -1,4 +1,3 @@
-// const baseUrl = 'https://intense-headland-75088.herokuapp.com';
 const baseUrl = 'https://teacher-app-ilku.onrender.com';
 
 export const login = async ({ email, password }) => {
